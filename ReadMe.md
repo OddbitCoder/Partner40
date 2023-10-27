@@ -239,29 +239,44 @@ Unless noted otherwise in the comments, we used 1/4 W resistors with a tolerance
 
 Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors. We chose this power rating because the physical sizes roughly match those of the original capacitors.
 
-### Other Components (8)
+### Other Components 
 
 | ID | Value | Value Schema | Value Ref 1 | Comments |
 |--|--|--|--|--|
 | BAT | 3.6V | 3V | VARTA SafeTronic 3.6 V | We used a 3.6 V 80 mAh Ni-Mh battery. |
-| V1 | LED | LED |  | Taken from the original/donor board. |
+| V1 | LED | LED |  | Specs? |
 | V2 | BA513 | 1N914 | BA 513 | We used a 1N914 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
 | V3 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
 | V4 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
-| Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Taken from the original/donor board. |
-| Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Taken from the original/donor board. |
-| Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Taken from the original/donor board. |
+| Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Specs? |
+| Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Specs? |
+| Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Specs? |
+| X10 | Board power connector | / | / |  |
+| J1 | Pin header 2×17 | / | / |  |
+| J2 | Pin header 2×32 | / | / |  |
+| J3 | Pin header 1×3 | / | / |  |
+| J5 | Pin header 1×5 | / | / |  |
+| J6 | Pin header 2×20 | / | / |  |
+| J7 | Pin header 2×13 | / | / |  |
+| J8 | Pin header 2×13 | / | / |  |
+| J9 | Pin header 2×13 | / | / |  |
+| JJ2 | Jumper 1×2 | / | / |  |
+| JJ7 | Jumper 1×2 | / | / |  |
+| JJ8 | Pin header 1×4 + Pin header 1×14 | / | / |  |
+| JJ9 | Jumper 2×2 | / | / |  |
+| JJ10 | Jumper 1×2 | / | / |  |
+| JJ50 | Jumper 2×2 | / | / |  |
 
 ## Shopping List
 
 | Item / List | Desc | Service | Link |
 |--|--|--|--|
 | Circuit board | / | PCBWay | TODO |
-| Mouser Project: Partner - E | Integrated circuits (74 / 101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=249dc903ed |
-| Mouser Project: Partner - R | Resistors (81 / 81) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=5393aec102 |
-| Mouser Project: Partner - C | Capacitors (59 / 59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d |
-| Mouser Project: Partner - V | Diodes (3 / 4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 |
-| Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101 / 101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 |
+| Mouser Project: Partner - E | Integrated circuits (74/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=249dc903ed |
+| Mouser Project: Partner - R | Resistors (81/81) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=5393aec102 |
+| Mouser Project: Partner - C | Capacitors (59/59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d |
+| Mouser Project: Partner - V | Diodes (3/4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 |
+| Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 |
 | 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 |
 | Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html |
 
@@ -280,10 +295,10 @@ The following components are not on these lists and you will need to find them e
 | E33 | Z80A DMA | Community |  |
 | E30 | Z80A SIO/1 | Community |  |
 | E32 | Z80A CPU | Original board |  |
-| V1 | Led diode | Original board | What kind? |
-| Y1 | Crystal 8 MHz | Original board | What kind? |
-| Y2 | Crystal 32.768 kHz | Original board | What kind? |
-| Y3 | Crystal 1.8432 MHz | Original board | What kind? |
-| J1, J2, J3, J5, J6, J7, J8, J9 | Connectors | Original board |  |
-| JJ2, JJ7, JJ8, JJ9, JJ10, JJ50 | Jumpers | Original board |  |
+| V1 | Led diode | Original board |  |
+| Y1 | Crystal 8 MHz | Original board |  |
+| Y2 | Crystal 32.768 kHz | Original board |  |
+| Y3 | Crystal 1.8432 MHz | Original board |  |
 | X10 | Board power connector | Original board |  |
+| J1, J2, J3, J5, J6, J7, J8, J9 (8) | Pin headers | Original board |  |
+| JJ2, JJ7, JJ8, JJ9, JJ10, JJ50 (6) | Jumpers | Original board |  |
