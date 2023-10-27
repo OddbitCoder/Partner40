@@ -284,4 +284,6 @@ The following components are not on these lists and you will need to find them e
 | Y1 | Crystal 8 MHz | Original board | What kind? |
 | Y2 | Crystal 32.768 kHz | Original board | What kind? |
 | Y3 | Crystal 1.8432 MHz | Original board | What kind? |
-|  | Connectors, jumpers TODO | Original board |  |
+| J1, J2, J3, J5, J6, J7, J8, J9 | Connectors | Original board |  |
+| JJ2, JJ7, JJ8, JJ9, JJ10, JJ50 | Jumpers | Original board |  |
+| X10 | Board power connector | Original board |  |
