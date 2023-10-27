@@ -66,11 +66,18 @@ static void FindPaths(NetNode node, int startPcbNetId, HashSet<int> pcbNetIds, H
     path.RemoveAt(path.Count - 1);  
 }
 
-const string kiCadFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kicad_pcb";
+const string kiCadFn = @"c:\Work\idp-pcb\idp\idp-valid.kicad_pcb";
 const string scanPath = @"C:\Users\miha\Desktop\vezje-idp\v4"; 
-const string maskPath = @"C:\Users\miha\Desktop\vezje-idp\kicad\IdpPcbValid\img";
-const string schFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch.txt";
-const string cacheFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets_cache.json";
+const string maskPath = @"c:\Work\idp-pcb\IdpPcbValid\img";
+const string schFn = @"c:\Work\idp-pcb\sch\sch.txt";
+const string cacheFn = @"c:\Work\idp-pcb\sch\pcb_nets_cache.json";
+const string refValMapFn = @"c:\Work\idp-pcb\sch\ref-val.txt";
+
+var refValMap = File.ReadAllLines(refValMapFn)
+    .Select(l => l.Trim())
+    .Where(l => !l.StartsWith("#"))
+    .Select(l => l.Split("\t"))
+    .ToDictionary(l => l[0], l => l[1]);
 
 string pcb = File.ReadAllText(kiCadFn);
 
@@ -144,7 +151,9 @@ m0 = new Regex(@"\(footprint .*?^\s*$", RegexOptions.Multiline | RegexOptions.Si
 r = new Regex(@"^\s*\(at ([^ ]+) ([^ )]+) ?([^)]*)\)", RegexOptions.Multiline);
 // (fp_text reference "R13" 
 var rRef = new Regex(@"\(fp_text reference ""([^""]*)""", RegexOptions.Multiline);
+var rVal = new Regex(@"\(fp_text value ""([^""]*)"".*?\(tstamp [^)]+\)", RegexOptions.Multiline | RegexOptions.Singleline);  
 int count = 0;
+var findReplPairs = new List<(string find, string val)>();
 while (m0.Success)
 {
     // get coords and orientation
@@ -157,7 +166,11 @@ while (m0.Success)
     {
         var padCount = 0;
         Match mRef = rRef.Match(m0.Value);
+        Match mVal = rVal.Match(m0.Value);
         string fpRef = mRef.Success ? mRef.Result("$1") : null;
+        // build list of find-replace pairs
+        refValMap.TryGetValue(fpRef ?? "", out string? val);
+        findReplPairs.Add((mVal.Value, val ?? ""));
         float x = Convert.ToSingle(m.Result("$1"));
         float y = Convert.ToSingle(m.Result("$2"));
         if (fpRef == "CX") { fpRef += ++cxNum; Console.WriteLine($"{fpRef} at {x} {y}"); }
@@ -197,6 +210,17 @@ while (m0.Success)
 
 Console.WriteLine($"Observed footprints: {count}");
 Console.WriteLine($"Loaded pads: {pads.Count}");
+
+// create new PCB file (update values)
+
+foreach (var (find, val) in findReplPairs)
+{
+    var replaceWith = Regex.Replace(find, @"\(fp_text value ""[^""]*""", $@"(fp_text value ""{val}""");
+    if (val == "") { replaceWith = replaceWith.Replace("\"F.Fab\")\r", "\"F.Fab\") hide\r"); }
+    else { replaceWith = replaceWith.Replace(" hide", ""); }
+    pcb = pcb.Replace(find, replaceWith);
+}
+File.WriteAllText(kiCadFn + ".new", pcb);
 
 // via stats
 
@@ -491,7 +515,7 @@ foreach (var item in pads)
     item.schNetId = nodes.Values.FirstOrDefault(n => n.name == $"{item.fpRef}/{item.lbl}")?.netId ?? -1;
 }
 
-using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets.txt"))
+using (var wr = new StreamWriter(@"c:\Work\idp-pcb\sch\pcb_nets.txt"))
 {
     foreach (var net in netsPcb)
     {
@@ -520,7 +544,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb
 
 int eqCount = 0;
 
-using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch_nets.txt"))
+using (var wr = new StreamWriter(@"c:\Work\idp-pcb\sch\sch_nets.txt"))
 {
     foreach (var net in netsSch)
     {
