@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using Newtonsoft.Json;
 
 static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color color, IEnumerable<KiCadObject> padsAndVias, int netId)
 {
@@ -45,6 +46,7 @@ const string kiCadFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kic
 const string scanPath = @"C:\Users\miha\Desktop\vezje-idp\v4"; 
 const string maskPath = @"C:\Users\miha\Desktop\vezje-idp\kicad\IdpPcbValid\img";
 const string schFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch.txt";
+const string cacheFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets_cache.json";
 
 string pcb = File.ReadAllText(kiCadFn);
 
@@ -341,23 +343,30 @@ var uncfObjs = pads.Select(x => (KiCadObject)x)
     .ToList();
 netId = 0;
 
-while (uncfObjs.Count > 0)
+if (File.Exists(cacheFn))
 {
-    var startObjs = new List<KiCadObject>(new[] { uncfObjs.First() });
-
-    do
+    pads = JsonConvert.DeserializeObject<List<Pad>>(File.ReadAllText(cacheFn));
+}
+else
+{
+    while (uncfObjs.Count > 0)
     {
-        FloodFill(ffMaskFront, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
-        startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
-        uncfObjs = uncfObjs.Where(x => x.netId == -1).ToList();
-        FloodFill(ffMaskBack, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
-        startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
-        uncfObjs = uncfObjs.Where(x => x.netId == -1).ToList();
-        Console.Write(".");
-    } while (startObjs.Count > 0);
+        var startObjs = new List<KiCadObject>(new[] { uncfObjs.First() });
 
-    netId++;
-    Console.Write("*");
+        do
+        {
+            FloodFill(ffMaskFront, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
+            startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
+            uncfObjs = uncfObjs.Where(x => x.netId == -1).ToList();
+            FloodFill(ffMaskBack, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
+            startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
+            uncfObjs = uncfObjs.Where(x => x.netId == -1).ToList();
+            Console.Write(".");
+        } while (startObjs.Count > 0);
+
+        netId++;
+        Console.Write("*");
+    }
 }
 
 Console.WriteLine();
@@ -365,6 +374,9 @@ Console.WriteLine($"{netId} nets were discovered.");
 
 int snc = pads.GroupBy(x => x.netId).Where(x => x.Count() == 1).Count();
 Console.WriteLine($"{snc} nets have one single node.");
+
+// write cache
+File.WriteAllText(cacheFn, JsonConvert.SerializeObject(pads));
 
 //ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front-filled.png"), ImageFormat.Png);
 
@@ -432,6 +444,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
         if (skip) { continue; }
         wr.WriteLine();
         wr.WriteLine($"*** NET ID: {net.GetHashCode()}");
+        var hs = new HashSet<int>();
         foreach (var item in net)
         {
             bool found = false;
@@ -440,6 +453,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
                 if (otherNet.Contains(item))
                 {
                     found = true;
+                    hs.Add(otherNet.GetHashCode());
                     wr.WriteLine($"{item} : {otherNet.GetHashCode()}");
                     break;
                 }
@@ -449,6 +463,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
                 wr.WriteLine($"{item} : NOT FOUND");
             }
         }
+        wr.WriteLine($"({hs.Count})");
     }
 }
 
@@ -462,19 +477,41 @@ while (true)
     string padId = Console.ReadLine();
     string fpRef = padId.Split('/')[0].ToUpper();
     string padLbl = padId.Contains('/') ? padId.Split('/')[1] : null;
-    var pad = pads.FirstOrDefault(x => x.fpRef == fpRef && x.lbl == padLbl);
-    if (pad != null)
+    if (padLbl == null)
     {
-        Console.WriteLine($"Net ID: {pad.netId}");
-        Console.WriteLine("Pads in this net:");
-        foreach (var p in pads.Where(x => x.netId == pad.netId))
+        var comp = pads.Where(x => x.fpRef == fpRef);
+        if (comp.Any())
         {
-            Console.WriteLine($"* {p.fpRef}/{p.lbl}");
+            foreach (var p in comp)
+            {
+                Console.WriteLine($"* {p.lbl} (net ID: {p.netId})");
+                foreach (var pp in pads.Where(x => x.netId == p.netId))
+                {
+                    Console.WriteLine($"\t* {pp.fpRef}/{pp.lbl}");
+                }
+            }
+        }
+        else 
+        {
+            Console.WriteLine("Component not found.");
         }
     }
     else
     {
-        Console.WriteLine("Pad not found.");
+        var pad = pads.FirstOrDefault(x => x.fpRef == fpRef && x.lbl == padLbl);
+        if (pad != null)
+        {
+            Console.WriteLine($"Net ID: {pad.netId}");
+            Console.WriteLine("Pads in this net:");
+            foreach (var p in pads.Where(x => x.netId == pad.netId))
+            {
+                Console.WriteLine($"* {p.fpRef}/{p.lbl}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Pad not found.");
+        }
     }
 }
 
