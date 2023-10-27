@@ -31,6 +31,34 @@ while (m0.Success)
 
 Console.WriteLine($"Loaded vias: {vias.Count}");
 
+// read segments
+// format: (segment (start 267.97 223.52) (end 271.78 223.52) (width 0.25) (layer "B.Cu") (net 0) (tstamp f6732fd7-6eb9-4b8f-89e0-1e00981737d1))
+var segs = new List<Seg>();
+m0 = new Regex(@"\(segment .*?$", RegexOptions.Multiline).Match(pcb);
+r = new Regex(@"\(segment \(start ([^ ]+) ([^)]+)\) \(end ([^ ]+) ([^)]+)\) \(width ([^)]+)\)");
+while (m0.Success)
+{
+    var m = r.Match(m0.Value);
+    if (!m.Success)
+    {
+        Console.WriteLine($"No match: {m0.Value}");
+    }
+    else
+    {
+        segs.Add(new Seg 
+        {
+            x1 = Convert.ToSingle(m.Result("$1")),
+            y1 = Convert.ToSingle(m.Result("$2")),
+            x2 = Convert.ToSingle(m.Result("$3")),
+            y2 = Convert.ToSingle(m.Result("$4")),
+            w = Convert.ToSingle(m.Result("$5"))
+        });
+    }
+    m0 = m0.NextMatch();
+}
+
+Console.WriteLine($"Loaded segments: {segs.Count}");
+
 // read footprints 
 // format:
 // (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" (layer "F.Cu")
@@ -105,6 +133,23 @@ foreach (var item in counters)
     Console.WriteLine($"{item.Key} : {item.Value}");
 }
 
+// seg stats
+
+Console.WriteLine();
+Console.WriteLine("SEGMENT STATS");
+
+counters = new Dictionary<string, int>();
+foreach (var seg in segs)
+{
+    string segKind = $"{seg.w}";
+    counters.TryGetValue(segKind, out int c);
+    counters[segKind] = c + 1;
+}
+foreach (var item in counters)
+{
+    Console.WriteLine($"{item.Key} : {item.Value}");
+}
+
 // pad stats
 
 Console.WriteLine();
@@ -120,6 +165,13 @@ foreach (var pad in pads)
 foreach (var item in counters)
 {
     Console.WriteLine($"{item.Key} : {item.Value}");
+}
+
+class Seg
+{
+    public float x1, y1;
+    public float x2, y2;
+    public float w;
 }
 
 class Via
