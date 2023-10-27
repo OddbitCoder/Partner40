@@ -1,8 +1,17 @@
 ﻿using System.Text.RegularExpressions;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
-string fn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kicad_pcb";
+const string kiCadFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kicad_pcb";
+const string scanFn = @"C:\Users\miha\Desktop\vezje-idp\v4\back-mirrored-300dpi.jpg"; // NOTE: this is just used to get the size
+const string maskFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\IdpPcbValid\img\mask-back-300dpi.png";
 
-string pcb = File.ReadAllText(fn);
+// side selector
+//const string sideSel = "F.Cu";
+const string sideSel = "B.Cu";
+
+string pcb = File.ReadAllText(kiCadFn);
 
 // read vias
 // format: (via (at 140.97 78.74) (size 0.8) (drill 0.4)
@@ -35,7 +44,7 @@ Console.WriteLine($"Loaded vias: {vias.Count}");
 // format: (segment (start 267.97 223.52) (end 271.78 223.52) (width 0.25) (layer "B.Cu") (net 0) (tstamp f6732fd7-6eb9-4b8f-89e0-1e00981737d1))
 var segs = new List<Seg>();
 m0 = new Regex(@"\(segment .*?$", RegexOptions.Multiline).Match(pcb);
-r = new Regex(@"\(segment \(start ([^ ]+) ([^)]+)\) \(end ([^ ]+) ([^)]+)\) \(width ([^)]+)\)");
+r = new Regex(@"\(segment \(start ([^ ]+) ([^)]+)\) \(end ([^ ]+) ([^)]+)\) \(width ([^)]+)\) \(layer ""([^""]+)""\)");
 while (m0.Success)
 {
     var m = r.Match(m0.Value);
@@ -51,7 +60,8 @@ while (m0.Success)
             y1 = Convert.ToSingle(m.Result("$2")),
             x2 = Convert.ToSingle(m.Result("$3")),
             y2 = Convert.ToSingle(m.Result("$4")),
-            w = Convert.ToSingle(m.Result("$5"))
+            w = Convert.ToSingle(m.Result("$5")),
+            layer = m.Result("$6")
         });
     }
     m0 = m0.NextMatch();
@@ -101,10 +111,10 @@ while (m0.Success)
                     shape = mPad.Result("$2"),
                     x = Convert.ToSingle(mPad.Result("$3")),
                     y = Convert.ToSingle(mPad.Result("$4")),
-                    rot = mPad.Result("$5") == "" ? 0 : Convert.ToSingle(mPad.Result("$5")),
+                    rot = rot = mPad.Result("$5") == "" ? 0 : Convert.ToSingle(mPad.Result("$5")),
                     size = Convert.ToSingle(mPad.Result("$6")),
                     drill = Convert.ToSingle(mPad.Result("$7"))
-                }.Transform(x, y, rot));
+                }.Transform(x, y, (int)rot));
             }
             m = m.NextMatch();
         }
@@ -167,21 +177,64 @@ foreach (var item in counters)
     Console.WriteLine($"{item.Key} : {item.Value}");
 }
 
-class Seg
+// export the pads (to see if the transformations are OK)
+
+var img = (Bitmap)Image.FromFile(scanFn);
+var mask = new Bitmap(img.Width, img.Height, PixelFormat.Format32bppArgb);
+var g = Graphics.FromImage(mask);
+
+foreach (var via in vias)
+{
+    //via.Render(g);
+}
+foreach (var pad in pads)
+{
+    //pad.Render(g);
+}
+foreach (var seg in segs.Where(x => x.layer == sideSel))
+{
+    seg.Render(g);
+}
+
+mask.Save(maskFn, ImageFormat.Png);
+
+abstract class KiCadObject
+{
+    protected const int ofsX = -729;
+    protected const int ofsY = -640;
+    protected const int dpi = 300;
+
+    public abstract void Render(Graphics g);
+}
+
+class Seg : KiCadObject
 {
     public float x1, y1;
     public float x2, y2;
     public float w;
+    public string layer;
+    public override void Render(Graphics g)
+    {
+        var pen = new Pen(Color.Black, w * 0.0393701f * dpi);
+        pen.StartCap = pen.EndCap = LineCap.Round;
+        g.DrawLine(pen, x1 * 0.0393701f * dpi + ofsX + 9, y1 * 0.0393701f * dpi + ofsY + 9, 
+            x2 * 0.0393701f * dpi + ofsX + 9, y2 * 0.0393701f * dpi + ofsY + 9);
+    }
 }
 
-class Via
+class Via : KiCadObject
 {
     public float x, y;
     public float size;
     public float drill;
+
+    public override void Render(Graphics g)
+    {
+        g.FillEllipse(Brushes.Black, x * 0.0393701f * dpi + ofsX, y * 0.0393701f * dpi + ofsY, 18, 18);
+    }
 }
 
-class Pad
+class Pad : KiCadObject
 {
     public float x, y;
     public float rot; // rotation 
@@ -190,19 +243,24 @@ class Pad
     public float size;
     public float drill;
 
-    public Pad Transform(float x, float y, float rot)
+    public Pad Transform(float x, float y, int rot)
     {
         // rotate
         if (rot < 0) { rot += 360; }
         for (int i = 0; i < rot / 90; i++)
         {
             float tmp = this.y;
-            this.y = this.x;
-            this.x = -tmp;
+            this.y = -this.x;
+            this.x = tmp;
         }
         // translate
         this.x += x;
         this.y += y;
         return this;
+    }
+
+    public override void Render(Graphics g)
+    {
+        g.FillEllipse(Brushes.Red, x * 0.0393701f * dpi + ofsX, y * 0.0393701f * dpi + ofsY, 18, 18);
     }
 }
