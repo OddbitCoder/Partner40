@@ -552,7 +552,8 @@ while (true)
             {
                 //Console.Write($"{fpRef}/{p.lbl} ");
                 Console.Write($"{p.lbl} ");
-                var otherPad = pads.FirstOrDefault(x => x.netId == p.netId && x.schNetId != -1 && x.fpRef != fpRef);
+                var otherPad = pads.FirstOrDefault(x => x.netId == p.netId && x.schNetId != -1 && x.fpRef != fpRef)
+                    ?? pads.FirstOrDefault(x => x.netId == p.netId && x.fpRef != fpRef);
                 Console.WriteLine(otherPad != null ? $"{otherPad.fpRef}/{otherPad.lbl}" : "NOT FOUND");
             }
         }
