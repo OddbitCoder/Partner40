@@ -1,4 +1,4 @@
-21737052629463448
+21740427679660006
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -79152,6 +79152,20 @@ Partner
 Partner_CP_Radial_D8.0mm_P5.00mm
 CP, Radial series, Radial, pin pitch=5.00mm, , diameter=8mm, Electrolytic Capacitor
 CP Radial series Radial pin pitch 5.00mm  diameter 8mm Electrolytic Capacitor
+0
+2
+2
+Partner
+Partner_Molex_Mega-Fit_76829-0106_2x03_P5.70mm_Vertical
+Molex Mega-Fit Power Connectors, 76829-0106 (compatible alternatives: 172065-0206, 172065-0306), 3 Pins per row (http://www.molex.com/pdm_docs/sd/768290102_sd.pdf), generated with kicad-footprint-generator
+connector Molex Mega-Fit side entry
+0
+6
+6
+Partner
+Partner_PinHeader_1x02_P2.54mm_Vertical
+Through hole straight pin header, 1x02, 2.54mm pitch, single row
+Through hole pin header THT 1x02 2.54mm single row
 0
 2
 2
