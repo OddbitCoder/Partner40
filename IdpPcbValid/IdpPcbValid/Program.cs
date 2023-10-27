@@ -222,6 +222,9 @@ foreach (var item in counters)
 var nodes = new Dictionary<string, NetNode>();
 string implCompName = "";
 
+var padRegex = new Regex(@"^[A-Z][A-Z0-9]*/[A-Z0-9]+$");
+var netNameStats = new Dictionary<string, int>();
+
 foreach (var line in File.ReadAllLines(schFn).Select(x => x.Trim()).Where(x => !x.StartsWith("--")))
 {
     string ln = line.Trim();
@@ -235,9 +238,14 @@ foreach (var line in File.ReadAllLines(schFn).Select(x => x.Trim()).Where(x => !
     // resolve memory banks
     ln = Regex.Replace(ln, @"BANK1/(\d+)", $"E59/$1 E60/$1 E61/$1 E62/$1 E71/$1 E72/$1 E73/$1 E74/$1");
     ln = Regex.Replace(ln, @"BANK2/(\d+)", $"E85/$1 E86/$1 E87/$1 E88/$1 E98/$1 E99/$1 E100/$1 E101/$1");
-    Console.WriteLine(line);
-    Console.WriteLine("= " + ln);
+    //Console.WriteLine(line);
+    //Console.WriteLine("= " + ln);
     var nodeNames = ln.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    foreach (var nn in nodeNames.Where(x => !padRegex.Match(x).Success))
+    {
+        if (!netNameStats.TryGetValue(nn, out int c)) { c = 0; }
+        netNameStats[nn] = c + 1;
+    }
     for (int i = 0; i < nodeNames.Length; i++)
     {
         for (int j = i + 1; j < nodeNames.Length; j++)
@@ -249,6 +257,13 @@ foreach (var line in File.ReadAllLines(schFn).Select(x => x.Trim()).Where(x => !
         }
     }
 }
+
+// output net name stats
+
+//foreach (var item in netNameStats.OrderByDescending(x => x.Value))
+//{
+//    Console.WriteLine($"{item.Key} : {item.Value}");
+//}
 
 // compute networks in the schema graph
 
@@ -270,14 +285,14 @@ Console.WriteLine($"Discovered {netId} nets in the schema network.");
 
 // output networks
 
-foreach (var net in nodes.Values.GroupBy(x => x.netId))
-{
-    Console.WriteLine($"Net ID: {net.Key}");
-    foreach (var item in net)
-    {
-        Console.WriteLine($"- {item.name}");
-    }
-}
+//foreach (var net in nodes.Values.GroupBy(x => x.netId))
+//{
+//    Console.WriteLine($"Net ID: {net.Key}");
+//    foreach (var item in net)
+//    {
+//        Console.WriteLine($"- {item.name}");
+//    }
+//}
 
 // render flood fill masks
 
@@ -298,7 +313,7 @@ foreach (var via in vias)
     via.Render(g);
 }
 
-ffMaskBack.Save(Path.Combine(maskPath, "ff-mask-back.png"), ImageFormat.Png);
+//ffMaskBack.Save(Path.Combine(maskPath, "ff-mask-back.png"), ImageFormat.Png);
 
 img = (Bitmap)Image.FromFile(Path.Combine(scanPath, "front-300dpi.jpg"));
 var ffMaskFront = new Bitmap(img.Width, img.Height, PixelFormat.Format32bppArgb);
@@ -317,7 +332,7 @@ foreach (var via in vias)
     via.Render(g);
 }
 
-ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front.png"), ImageFormat.Png);
+//ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front.png"), ImageFormat.Png);
 
 // flood fill
 
@@ -355,8 +370,6 @@ Console.WriteLine($"{snc} nets have one single node.");
 
 // compare nets
 
-var padRegex = new Regex(@"^[A-Z][A-Z0-9]*/[0-9]+$");
-
 var netsSch = nodes.Values.GroupBy(x => x.netId)
     .Select(x => x.Where(y => padRegex.Match(y.name).Success)) // exclude nodes that are not pads
     .Where(x => x.Any())
@@ -373,21 +386,72 @@ var netsPcb = pads.GroupBy(x => x.netId)
 
 Console.WriteLine($"{netsSch.Count} : {netsPcb.Count}");
 
-int eqCount = 0;
-
-foreach (var net in netsSch)
+using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets.txt"))
 {
-    foreach (var net2 in netsPcb)
+    foreach (var net in netsPcb)
     {
-        if (net.SetEquals(net2)) { eqCount++; }
+        wr.WriteLine();
+        wr.WriteLine($"*** NET ID: {net.GetHashCode()}");
+        foreach (var item in net)
+        {
+            bool found = false;
+            foreach (var otherNet in netsSch)
+            {
+                if (otherNet.Contains(item))
+                {
+                    found = true;
+                    wr.WriteLine($"{item} : {otherNet.GetHashCode()}");
+                    break;
+                }
+            }
+            if (!found)
+            {
+                wr.WriteLine($"{item} : NOT FOUND");
+            }
+        }
     }
 }
 
-Console.WriteLine($"Set equivalence: {eqCount}");
+using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch_nets.txt"))
+{
+    foreach (var net in netsSch)
+    {
+        bool skip = false;
+        foreach (var net2 in netsPcb)
+        {
+            if (net.SetEquals(net2))
+            {
+                // skip nets that match completely
+                skip = true;
+                break;
+            }
+        }
+        if (skip) { continue; }
+        wr.WriteLine();
+        wr.WriteLine($"*** NET ID: {net.GetHashCode()}");
+        foreach (var item in net)
+        {
+            bool found = false;
+            foreach (var otherNet in netsPcb)
+            {
+                if (otherNet.Contains(item))
+                {
+                    found = true;
+                    wr.WriteLine($"{item} : {otherNet.GetHashCode()}");
+                    break;
+                }
+            }
+            if (!found)
+            {
+                wr.WriteLine($"{item} : NOT FOUND");
+            }
+        }
+    }
+}
 
 // interactive mode
 
-while (true)
+    while (true)
 {
     Console.Write("Enter pad identifier: ");
     string padId = Console.ReadLine();
