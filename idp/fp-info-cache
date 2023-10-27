@@ -1,4 +1,4 @@
-21735365169239652
+21737052629463448
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -79148,6 +79148,13 @@ TO-264-5 Vertical RM 3.81mm
 0
 5
 5
+Partner
+Partner_CP_Radial_D8.0mm_P5.00mm
+CP, Radial series, Radial, pin pitch=5.00mm, , diameter=8mm, Electrolytic Capacitor
+CP Radial series Radial pin pitch 5.00mm  diameter 8mm Electrolytic Capacitor
+0
+2
+2
 Potentiometer_SMD
 Potentiometer_ACP_CA6-VSMD_Vertical
 Potentiometer, vertical, ACP CA6-VSMD, http://www.acptechnologies.com/wp-content/uploads/2017/06/01-ACP-CA6.pdf
