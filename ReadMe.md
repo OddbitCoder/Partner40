@@ -313,4 +313,79 @@ The following components are not on these lists and you will need to find them e
 
 ## Assembly
 
-TBD
+TODO
+
+### Power Connector
+
+Front side of the board:
+```
+          (R78-R85)
+
+ (JJ1)   12V  5V  5V
+ (JJ5)    o   o   o
+ (JJ7)
+ (JJ6)  -12V GND GND
+(JJ31)    o   o   o
+(JJ30)
+```
+
+### Led Diode
+
+Front side of the board:
+```
+       C     A
+(R17)  o─┤◁─o  (CX)
+(C7)
+```
+
+## Board Settings
+
+### Potentiomters R92, R93, R94
+
+The following are the exact resistance measurements between the three pins of the potentiometers (trimmers). These potentiometers were taken from the donor board ("Ref 3"). 
+
+R92, bottom view:
+```
+    o     o
+16kΩ \   / 35kΩ
+       o
+```
+
+R93, bottom view:
+```
+   o     o
+9kΩ \   / 43kΩ
+      o
+```
+
+R94, bottom view:
+```
+     o     o
+2.2kΩ \   / 8.2kΩ
+        o
+```
+
+### Jumpers 
+
+JJ8, top view:
+
+```
+┌───────────────┐
+│         o o─o─o 
+│         └─────┐
+o o o o o o o o o o o o o o
+```
+
+JJ9, top view:
+
+```
+       o o  (R58,R59)
+(E64)  o─o
+```
+
+JJ50, top view:
+
+```
+       o─o  (JJ8)
+(E43)  o─o
+```
