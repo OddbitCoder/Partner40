@@ -11,7 +11,7 @@
 
 | Pad Type | Count | Pad Diam | Drill Diam |
 |--|--|--|--|
-| Via | 1038 | 1.4 mm | 0.8 mm |
+| Via | 1036 | 1.4 mm | 0.8 mm |
 | Circular - normal | 2115 | 1.6 mm | 1.0 mm |
 | Circular - large | 9 | 2.8 mm | 2.0 mm |
 | Square | 445 | 1.6 mm | 1.0 mm |
@@ -203,6 +203,9 @@
 | R88 | 47kΩ | 47 kΩ ±5% |  |
 | R89 | 68Ω | 68 Ω ±5% |  |
 | R90 | 10kΩ | 10 kΩ ±5% |  |
+| R92 | 50kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
+| R93 | 50kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
+| R94 | 10kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
 | R91 | 4.7kΩ | 4.7 kΩ ±5% |  |
 | R95 | 10kΩ | 10 kΩ ±5% |  |
 | R200 | Z 2.7V | BZX 2,7 | Zener diode. We used Vishay's TZX2V7C-TR diode. |
@@ -251,7 +254,7 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 | Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Specs? |
 | Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Specs? |
 | Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Specs? |
-| X10 | Board power connector | / | / |  |
+| X10 | Power connector | / | / |  |
 | J1 | Pin header 2×17 | / | / |  |
 | J2 | Pin header 2×32 | / | / |  |
 | J3 | Pin header 1×3 | / | / |  |
@@ -267,41 +270,47 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 | JJ10 | Jumper 1×2 | / | / |  |
 | JJ50 | Jumper 2×2 | / | / |  |
 
-The original jumpers and pin headers have a termination post length of 3 mm and a mating post length of just below 7 mm.
+The original jumpers and pin headers have a termination post length of just over 3 mm and a mating post length of just below 7 mm.
 
 ## Shopping List
 
-| Item / List | Desc | Service | Link |
-|--|--|--|--|
-| Circuit board | / | PCBWay | TODO |
-| Mouser Project: Partner - E | Integrated circuits (74/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=249dc903ed |
-| Mouser Project: Partner - R | Resistors (81/81) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=5393aec102 |
-| Mouser Project: Partner - C | Capacitors (59/59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d |
-| Mouser Project: Partner - V | Diodes (3/4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 |
-| Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 |
-| Mouser Project: Partner - J+JJ | Jumpers & pin headers (14/14*) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=dc5819c5d5 |
-| 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 |
-| Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html |
+| Item / List | Desc | Service | Link | Price |
+|--|--|--|--|--|
+| Circuit board | / | PCBWay | TODO | 35.84 USD* |
+| Mouser Project: Partner - E | Integrated circuits (74/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=249dc903ed | 118.95 € |
+| Mouser Project: Partner - R | Resistors (81/81) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=5393aec102 | 12.20 € |
+| Mouser Project: Partner - C | Capacitors (59/59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d | 32.97 € |
+| Mouser Project: Partner - V | Diodes (3/4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 | 0.47 € |
+| Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 | 103.18 € |
+| Mouser Project: Partner - J+JJ | Jumpers & pin headers (14/14**) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=dc5819c5d5 | 48.92 € |
+| 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 | 0.69 € |
+| Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html | 4.55 € |
+| **Total** |  |  |  | **~360 €** |
 
-\* One of the jumpers is made of two pin headers. It is thus actually 15 J and JJ components altogether.
+\*The minimum order at PCBWay is 5 boards. The price shown here is for 1 board.
+\*\*One of the jumpers (JJ8) is made of two pin headers. It is thus actually 15 J and JJ components altogether.
 
 The following components are not on these lists and you will need to find them elsewhere (e.g., eBay):
 
-| ID | Value | Our Source | Comments |
-|--|--|--|--|
-| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 | eBay |  |
-| E51 | M2716 | eBay |  |
-| E56 | D765 | eBay |  |
-| E64 | MC14411 | eBay |  |
-| E35 | MM58167A | eBay |  |
-| E48 | WD1691 | Original board |  |
-| E57 | WD2143 | eBay |  |
-| E67 | Z80A CTC | Original board |  |
-| E33 | Z80A DMA | Community |  |
-| E30 | Z80A SIO/1 | Community |  |
-| E32 | Z80A CPU | Original board |  |
-| V1 | Led diode | Original board |  |
-| Y1 | Crystal 8 MHz | Original board |  |
-| Y2 | Crystal 32.768 kHz | Original board |  |
-| Y3 | Crystal 1.8432 MHz | Original board |  |
-| X10 | Board power connector | Original board |  |
+| ID | Value | 
+|--|--|
+| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 | 
+| E51 | M2716 | 
+| E56 | D765 | 
+| E64 | MC14411 | 
+| E35 | MM58167A | 
+| E48 | WD1691 | 
+| E57 | WD2143 | 
+| E67 | Z80A CTC | 
+| E33 | Z80A DMA | 
+| E30 | Z80A SIO/1 | 
+| E32 | Z80A CPU | 
+| V1 | Led diode | 
+| Y1 | Crystal 8 MHz | 
+| Y2 | Crystal 32.768 kHz | 
+| Y3 | Crystal 1.8432 MHz | 
+| X10 | Power connector | 
+
+## Assembly
+
+TBD
