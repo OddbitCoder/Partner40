@@ -130,6 +130,8 @@ while (m0.Success)
 
 Console.WriteLine($"Loaded segments: {segs.Count}");
 
+int cxNum = 0;
+
 // read footprints 
 // format:
 // (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" (layer "F.Cu")
@@ -158,6 +160,7 @@ while (m0.Success)
         string fpRef = mRef.Success ? mRef.Result("$1") : null;
         float x = Convert.ToSingle(m.Result("$1"));
         float y = Convert.ToSingle(m.Result("$2"));
+        if (fpRef == "CX") { fpRef += ++cxNum; Console.WriteLine($"{fpRef} at {x} {y}"); }
         float rot = m.Result("$3") == "" ? 0 : Convert.ToSingle(m.Result("$3"));
         // read pads
         var rPad = new Regex(@"\(pad ""([^""]*)"" thru_hole ([^ ]+) \(at ([^ ]+) ([^ )]+) ?([^)]*)\) \(size ([^ ]+) [^)]+\) \(drill ([^)]+)\)");
@@ -439,8 +442,8 @@ File.WriteAllText(cacheFn, JsonConvert.SerializeObject(pads));
 
 // compare nets
 
-var missingComponents = new[] { "CX", "C1", "C2", "C3", "C4", "C10", "C100", "C101", "C11", "C12", 
-    "C13", "C14", "C15", "C16", "C19", "C9", "J4", "J11", "R27", "R28", 
+var missingComponents = new[] { "C10", "C100", "C101", "C11", "C12", 
+    "C13", "C14", "C15", "C16", "C19", "C9", "J4", "J11", "R27", "R28",
     "R30", "R31", "R32", "R33", "R34", "R35", "R56",
     "R57" // "JJ11", "JJ12", "JJ3", "JJ30", "JJ31", "JJ3A", "JJ4", "JJ5", "JJ6", "R94"
 };
