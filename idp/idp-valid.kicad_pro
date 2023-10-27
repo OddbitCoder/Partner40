@@ -174,14 +174,18 @@
       "track_widths": [
         0.0,
         0.25,
-        0.5,
-        1.27,
-        2.54
+        0.6,
+        1.4,
+        2.4
       ],
       "via_dimensions": [
         {
           "diameter": 0.0,
           "drill": 0.0
+        },
+        {
+          "diameter": 1.4,
+          "drill": 0.8
         }
       ],
       "zones_allow_external_fillets": false
