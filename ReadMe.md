@@ -203,9 +203,9 @@
 | R88 | 47kΩ | 47 kΩ ±5% |  |
 | R89 | 68Ω | 68 Ω ±5% |  |
 | R90 | 10kΩ | 10 kΩ ±5% |  |
-| R92 | 50kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
-| R93 | 50kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
-| R94 | 10kΩ |  | Potentiometer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
+| R92 | 50kΩ |  | Trimmer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
+| R93 | 50kΩ |  | Trimmer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
+| R94 | 10kΩ |  | Trimmer Bourns 3296Y. Taken from the donor board ("Ref 3") for measurements. |
 | R91 | 4.7kΩ | 4.7 kΩ ±5% |  |
 | R95 | 10kΩ | 10 kΩ ±5% |  |
 | R200 | Z 2.7V | BZX 2,7 | Zener diode. We used Vishay's TZX2V7C-TR diode. |
@@ -282,40 +282,43 @@ The original jumpers and pin headers have a termination post length of just over
 | Mouser Project: Partner - C | Capacitors (59/59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d | 32.97 € |
 | Mouser Project: Partner - V | Diodes (3/4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 | 0.47 € |
 | Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 | 103.18 € |
-| Mouser Project: Partner - J+JJ | Jumpers & pin headers (14/14**) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=dc5819c5d5 | 48.92 € |
+| Mouser Project: Partner - J+JJ | Jumpers & pin headers (14/14**) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=dc5819c5d5 | 50.92 € |
 | 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 | 0.69 € |
 | Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html | 4.55 € |
-| **Total** |  |  |  | **~360 €** |
+| **Total** |  |  |  | **~365 €** |
 
 \*The minimum order at PCBWay is 5 boards. The price shown here is for 1 board.
+
 \*\*One of the jumpers (JJ8) is made of two pin headers. It is thus actually 15 J and JJ components altogether.
 
 The following components are not on these lists and you will need to find them elsewhere (e.g., eBay):
 
-| ID | Value | 
-|--|--|
-| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 | 
-| E51 | M2716 | 
-| E56 | D765 | 
-| E64 | MC14411 | 
-| E35 | MM58167A | 
-| E48 | WD1691 | 
-| E57 | WD2143 | 
-| E67 | Z80A CTC | 
-| E33 | Z80A DMA | 
-| E30 | Z80A SIO/1 | 
-| E32 | Z80A CPU | 
-| V1 | Led diode | 
-| Y1 | Crystal 8 MHz | 
-| Y2 | Crystal 32.768 kHz | 
-| Y3 | Crystal 1.8432 MHz | 
-| X10 | Power connector | 
+| ID | Value | Our Source |
+|--|--|--|
+| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 | eBay |
+| E51 | M2716 | eBay |
+| E56 | D765 | eBay |
+| E64 | MC14411 | eBay |
+| E35 | MM58167A | eBay |
+| E48 | WD1691 | Donor board |
+| E57 | WD2143 | eBay |
+| E67 | Z80A CTC | Donor board |
+| E33 | Z80A DMA | Community |
+| E30 | Z80A SIO/1 | Community |
+| E32 | Z80A CPU | Donor board |
+| V1 | LED diode | Donor board |
+| Y1 | Crystal 8 MHz | Donor board | 
+| Y2 | Crystal 32.768 kHz | Donor board |
+| Y3 | Crystal 1.8432 MHz | Donor board |
+| X10 | Power connector | Donor board |
 
 ## Assembly
 
-TODO
+The following figure shows the board's layout and helps you understand where each component should be placed and how it should be oriented. There is also a [PDF version](./gfx/idp-pcb-layout.pdf).
 
-### Power Connector
+![Board layout.](./gfx/idp-pcb-layout.png)
+
+### Power Connector (X10)
 
 Front side of the board:
 ```
@@ -329,20 +332,11 @@ Front side of the board:
 (JJ30)
 ```
 
-### Led Diode
-
-Front side of the board:
-```
-       C     A
-(R17)  o─┤◁─o  (CX)
-(C7)
-```
-
 ## Board Settings
 
-### Potentiomters R92, R93, R94
+### Trimmers R92, R93, R94
 
-The following are the exact resistance measurements between the three pins of the potentiometers (trimmers). These potentiometers were taken from the donor board ("Ref 3"). 
+The following are the exact resistance measurements between the three pins of the trimmers. These trimmers were taken from the donor board ("Ref 3"). 
 
 R92, bottom view:
 ```
@@ -389,3 +383,7 @@ JJ50, top view:
        o─o  (JJ8)
 (E43)  o─o
 ```
+
+## Board Initialization
+
+TODO
