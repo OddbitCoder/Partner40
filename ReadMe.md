@@ -267,6 +267,8 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 | JJ10 | Jumper 1×2 | / | / |  |
 | JJ50 | Jumper 2×2 | / | / |  |
 
+The original jumpers and pin headers have a termination post length of 3 mm and a mating post length of just below 7 mm.
+
 ## Shopping List
 
 | Item / List | Desc | Service | Link |
@@ -277,8 +279,11 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 | Mouser Project: Partner - C | Capacitors (59/59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d |
 | Mouser Project: Partner - V | Diodes (3/4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 |
 | Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101/101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 |
+| Mouser Project: Partner - J+JJ | Jumpers & pin headers (14/14*) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=dc5819c5d5 |
 | 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 |
 | Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html |
+
+\* One of the jumpers is made of two pin headers. It is thus actually 15 J and JJ components altogether.
 
 The following components are not on these lists and you will need to find them elsewhere (e.g., eBay):
 
@@ -300,5 +305,3 @@ The following components are not on these lists and you will need to find them e
 | Y2 | Crystal 32.768 kHz | Original board |  |
 | Y3 | Crystal 1.8432 MHz | Original board |  |
 | X10 | Board power connector | Original board |  |
-| J1, J2, J3, J5, J6, J7, J8, J9 (8) | Pin headers | Original board |  |
-| JJ2, JJ7, JJ8, JJ9, JJ10, JJ50 (6) | Jumpers | Original board |  |
