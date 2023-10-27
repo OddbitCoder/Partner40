@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json;
-using System.Security.Cryptography.X509Certificates;
 
 static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color color, IEnumerable<KiCadObject> padsAndVias, int netId)
 {
@@ -429,29 +428,35 @@ foreach (var item in nodes.Values)
     item.pcbNetId = pads.FirstOrDefault(p => $"{p.fpRef}/{p.lbl}" == item.name)?.netId ?? -1;
 }
 
+foreach (var item in pads)
+{
+    item.schNetId = nodes.Values.FirstOrDefault(n => n.name == $"{item.fpRef}/{item.lbl}")?.netId ?? -1;
+}
+
 using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets.txt"))
 {
     foreach (var net in netsPcb)
     {
-        wr.WriteLine();
-        wr.WriteLine($"*** NET ID: {net.netId}");
-        foreach (var item in net.set)
+        bool skip = false;
+        foreach (var net2 in netsSch)
         {
-            bool found = false;
-            foreach (var otherNet in netsSch)
+            if (net.set.SetEquals(net2.set))
             {
-                if (otherNet.set.Contains(item))
-                {
-                    found = true;
-                    wr.WriteLine($"{item} : {otherNet.netId}");
-                    break;
-                }
-            }
-            if (!found)
-            {
-                wr.WriteLine($"{item} : NOT FOUND");
+                // skip nets that match completely
+                skip = true;
+                break;
             }
         }
+        if (skip) { continue; }
+        wr.WriteLine();
+        wr.WriteLine($"*** NET ID: {net.netId}");
+        var hs = new HashSet<int>();
+        foreach (var item in net.items.Values)
+        {
+            if (item.schNetId != -1) { hs.Add(item.schNetId); }
+            wr.WriteLine($"{item.fpRef}/{item.lbl} : {item.schNetId}");
+        }
+        wr.WriteLine($"({hs.Count})");
     }
 }
 
@@ -483,7 +488,6 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
         }
         wr.WriteLine($"({hs.Count})");
         var pcbNetIds = net.items.Values.Select(x => x.pcbNetId).ToHashSet();
-        // static void FindPaths(NetNode node, int startPcbNetId, HashSet<int> pcbNetIds, HashSet<NetNode> tabu, List<NetNode> path, StreamWriter wr) // DFS
         foreach (var group in net.items.Values.Where(x => x.pcbNetId != -1).GroupBy(x => x.pcbNetId))
         {
             FindPaths(group.First(), group.First().pcbNetId, pcbNetIds, new HashSet<NetNode>(), new List<NetNode>(), wr);
@@ -550,6 +554,7 @@ abstract class KiCadObject
     public float x, y;
     public float size;
     public int netId = -1;
+    public int schNetId = -1;
 
     public abstract void Render(Graphics g);
 
