@@ -245,9 +245,9 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 |--|--|--|--|--|
 | BAT | 3.6V | 3V | VARTA SafeTronic 3.6 V | We used a 3.6 V 80 mAh Ni-Mh battery. |
 | V1 | LED | LED |  | Taken from the original/donor board. |
-| V2 | BA513 | 1N914 | BA 513 | We used a 1N914 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
-| V3 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
-| V4 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
+| V2 | BA513 | 1N914 | BA 513 | We used a 1N914 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
+| V3 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
+| V4 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a BA513 (1N4448) diode. |
 | Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Taken from the original/donor board. |
 | Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Taken from the original/donor board. |
 | Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Taken from the original/donor board. |
@@ -267,16 +267,21 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 
 The following components are not on these lists and you will need to find them elsewhere (e.g., eBay):
 
-| ID | Value | Comments |
-|--|--|--|
-| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
-| X | X |  |
+| ID | Value | Our Source | Comments |
+|--|--|--|--|
+| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 | eBay |  |
+| E51 | M2716 | eBay |  |
+| E56 | D765 | eBay |  |
+| E64 | MC14411 | eBay |  |
+| E35 | MM58167A | eBay |  |
+| E48 | WD1691 | Original board |  |
+| E57 | WD2143 | eBay |  |
+| E67 | Z80A CTC | Original board |  |
+| E33 | Z80A DMA | Community |  |
+| E30 | Z80A SIO/1 | Community |  |
+| E32 | Z80A CPU | Original board |  |
+| V1 | Led diode | Original board | What kind? |
+| Y1 | Crystal 8 MHz | Original board | What kind? |
+| Y2 | Crystal 32.768 kHz | Original board | What kind? |
+| Y3 | Crystal 1.8432 MHz | Original board | What kind? |
+|  | Connectors, jumpers TODO | Original board |  |
