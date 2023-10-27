@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using Newtonsoft.Json;
+using System.Security.Cryptography.X509Certificates;
 
 static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color color, IEnumerable<KiCadObject> padsAndVias, int netId)
 {
@@ -40,6 +41,22 @@ static void GraphFill(NetNode node, int netId)
             stack.Push(nn); 
         }
     }
+}
+
+static void FindPaths(NetNode node, int startPcbNetId, HashSet<int> pcbNetIds, HashSet<NetNode> tabu, List<NetNode> path, StreamWriter wr) // DFS
+{
+    tabu.Add(node);
+    //wr.WriteLine(node.name);
+    if (node.pcbNetId != -1 && node.pcbNetId != startPcbNetId && path.Last(x => x.pcbNetId != -1).pcbNetId != node.pcbNetId)
+    {
+        wr.WriteLine(path.Select(x => x.name).Aggregate((a, b) => $"{a} -> {b}") + $" -> {node.name}");
+    }
+    path.Add(node);
+    foreach (var n in node.nodes.Where(x => (pcbNetIds.Contains(x.pcbNetId) || x.pcbNetId == -1) && !tabu.Contains(x)))
+    {
+        FindPaths(n, startPcbNetId, pcbNetIds, tabu, path, wr);
+    }
+    path.RemoveAt(path.Count - 1);  
 }
 
 const string kiCadFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kicad_pcb";
@@ -383,36 +400,50 @@ File.WriteAllText(cacheFn, JsonConvert.SerializeObject(pads));
 // compare nets
 
 var netsSch = nodes.Values.GroupBy(x => x.netId)
-    .Select(x => x.Where(y => padRegex.Match(y.name).Success)) // exclude nodes that are not pads
-    .Where(x => x.Any())
-    .Select(x => x.Select(y => y.name))
-    .Select(x => x.ToHashSet())
+    .Select(x => new {
+        netId = x.Key,
+        set = x.Where(y => y.name.Contains("/")) // exclude nodes that are not pads
+            .Select(y => y.name)
+            .ToHashSet(),
+        items = x.Where(y => y.name.Contains("/"))
+            .ToDictionary(y => y.name, y => y)
+    }) 
+    .Where(x => x.set.Any())
     .ToList();
 var netsPcb = pads.GroupBy(x => x.netId)
-    .Where(x => x.Count() > 1) // exclude nets with one single pad
-    .Select(x => x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef))) // excl. electrolytic and CX caps 
-    .Where(x => x.Any())
-    .Select(x => x.Select(y => $"{y.fpRef}/{y.lbl}"))
-    .Select(x => x.ToHashSet())
+    .Select(x => new {
+        netId = x.Key,
+        set = x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef)) // excl. electrolytic and CX caps 
+            .Select(y => $"{y.fpRef}/{y.lbl}")
+            .ToHashSet(),
+        items = x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef))
+            .ToDictionary(y => $"{y.fpRef}/{y.lbl}", y => y)
+    })
+    .Where(x => x.set.Count() > 1) // excl. nets with one single node
     .ToList();
 
 Console.WriteLine($"{netsSch.Count} : {netsPcb.Count}");
+
+foreach (var item in nodes.Values)
+{
+    item.pcbNetId = pads.FirstOrDefault(p => $"{p.fpRef}/{p.lbl}" == item.name)?.netId ?? -1;
+}
 
 using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb_nets.txt"))
 {
     foreach (var net in netsPcb)
     {
         wr.WriteLine();
-        wr.WriteLine($"*** NET ID: {net.GetHashCode()}");
-        foreach (var item in net)
+        wr.WriteLine($"*** NET ID: {net.netId}");
+        foreach (var item in net.set)
         {
             bool found = false;
             foreach (var otherNet in netsSch)
             {
-                if (otherNet.Contains(item))
+                if (otherNet.set.Contains(item))
                 {
                     found = true;
-                    wr.WriteLine($"{item} : {otherNet.GetHashCode()}");
+                    wr.WriteLine($"{item} : {otherNet.netId}");
                     break;
                 }
             }
@@ -433,7 +464,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
         bool skip = false;
         foreach (var net2 in netsPcb)
         {
-            if (net.SetEquals(net2))
+            if (net.set.SetEquals(net2.set))
             {
                 // skip nets that match completely
                 skip = true;
@@ -443,27 +474,20 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
         }
         if (skip) { continue; }
         wr.WriteLine();
-        wr.WriteLine($"*** NET ID: {net.GetHashCode()}");
+        wr.WriteLine($"*** NET ID: {net.netId}");
         var hs = new HashSet<int>();
-        foreach (var item in net)
+        foreach (var item in net.items.Values)
         {
-            bool found = false;
-            foreach (var otherNet in netsPcb)
-            {
-                if (otherNet.Contains(item))
-                {
-                    found = true;
-                    hs.Add(otherNet.GetHashCode());
-                    wr.WriteLine($"{item} : {otherNet.GetHashCode()}");
-                    break;
-                }
-            }
-            if (!found)
-            {
-                wr.WriteLine($"{item} : NOT FOUND");
-            }
+            if (item.pcbNetId != -1) { hs.Add(item.pcbNetId); }
+            wr.WriteLine($"{item.name} : {item.pcbNetId}");          
         }
         wr.WriteLine($"({hs.Count})");
+        var pcbNetIds = net.items.Values.Select(x => x.pcbNetId).ToHashSet();
+        // static void FindPaths(NetNode node, int startPcbNetId, HashSet<int> pcbNetIds, HashSet<NetNode> tabu, List<NetNode> path, StreamWriter wr) // DFS
+        foreach (var group in net.items.Values.Where(x => x.pcbNetId != -1).GroupBy(x => x.pcbNetId))
+        {
+            FindPaths(group.First(), group.First().pcbNetId, pcbNetIds, new HashSet<NetNode>(), new List<NetNode>(), wr);
+        }
     }
 }
 
@@ -608,4 +632,5 @@ class NetNode
     public string name;
     public List<NetNode> nodes = new();
     public int netId = -1;
+    public int pcbNetId = -1;
 }
