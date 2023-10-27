@@ -412,6 +412,8 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\pcb
     }
 }
 
+int eqCount = 0;
+
 using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch_nets.txt"))
 {
     foreach (var net in netsSch)
@@ -423,6 +425,7 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
             {
                 // skip nets that match completely
                 skip = true;
+                eqCount++;
                 break;
             }
         }
@@ -449,9 +452,11 @@ using (var wr = new StreamWriter(@"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch
     }
 }
 
+Console.WriteLine($"Discovered {eqCount} equal nets.");
+
 // interactive mode
 
-    while (true)
+while (true)
 {
     Console.Write("Enter pad identifier: ");
     string padId = Console.ReadLine();
