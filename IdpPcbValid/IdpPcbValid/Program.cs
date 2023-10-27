@@ -213,14 +213,14 @@ Console.WriteLine($"Loaded pads: {pads.Count}");
 
 // create new PCB file (update values)
 
-foreach (var (find, val) in findReplPairs)
-{
-    var replaceWith = Regex.Replace(find, @"\(fp_text value ""[^""]*""", $@"(fp_text value ""{val}""");
-    if (val == "") { replaceWith = replaceWith.Replace("\"F.Fab\")\r", "\"F.Fab\") hide\r"); }
-    else { replaceWith = replaceWith.Replace(" hide", ""); }
-    pcb = pcb.Replace(find, replaceWith);
-}
-File.WriteAllText(kiCadFn + ".new", pcb);
+//foreach (var (find, val) in findReplPairs)
+//{
+//    var replaceWith = Regex.Replace(find, @"\(fp_text value ""[^""]*""", $@"(fp_text value ""{val}""");
+//    if (val == "") { replaceWith = replaceWith.Replace("\"F.Fab\")\r", "\"F.Fab\") hide\r"); }
+//    else { replaceWith = replaceWith.Replace(" hide", ""); }
+//    pcb = pcb.Replace(find, replaceWith);
+//}
+//File.WriteAllText(kiCadFn + ".new", pcb);
 
 // via stats
 
