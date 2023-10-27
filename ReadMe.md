@@ -1,7 +1,11 @@
+## Board 
 
-## Tracks
-
-Track widths: 2.4 mm, 1.4 mm, 0.6 mm, 0.25 mm.
+| Property | Value |
+|--|--|
+| Size | 302 mm × 247 mm |
+| Thickness | 1.6 mm |
+| Track widths | 2.4 mm, 1.4 mm, 0.6 mm, 0.25 mm |
+| Pad sizes | See below. |
 
 ## Pads 
 
@@ -12,10 +16,6 @@ Track widths: 2.4 mm, 1.4 mm, 0.6 mm, 0.25 mm.
 | Circular - large | 9 | 2.8 mm | 2.0 mm |
 | Square | 445 | 1.6 mm | 1.0 mm |
 | Rounded square | 1 | 1.6 mm | 1.0 mm |
-
-## Board 
-
-Thickness: 1.6 mm
 
 ## Components 
 
@@ -235,7 +235,7 @@ Unless noted otherwise in the comments, we used 1/4 W resistors with a tolerance
 | C110 | 390pF (391) | 390K Y5P | 380/390K | 5 mm |  |
 | C300 | 330pF (331) | 330 | 330 | 5 mm |  |
 | C301 | 680nF | 684 100V | 684 50V | 9 mm | We used a multilayer ceramic capacitor (50V 0.68μF ±10%). It is physically/visually too small though (a higher voltage rating would probably look better). |
-| CX | 0.1μF (104) | 104 50V | 104 50V | 5 mm | We used multilayer ceramic capacitors (50V 0.1μF ±5%). There are 41 CXs on the board. | 
+| CX (41) | 0.1μF (104) | 104 50V | 104 50V | 5 mm | We used multilayer ceramic capacitors (50V 0.1μF ±5%). There are 41 CXs on the board. | 
 
 Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors. We chose this power rating because the physical sizes roughly match those of the original capacitors.
 
@@ -251,3 +251,32 @@ Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors
 | Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Taken from the original/donor board. |
 | Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Taken from the original/donor board. |
 | Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Taken from the original/donor board. |
+
+## Shopping List
+
+| Item / List | Desc | Service | Link |
+|--|--|--|--|
+| Circuit board | / | PCBWay | TODO |
+| Mouser Project: Partner - E | Integrated circuits (74 / 101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=249dc903ed |
+| Mouser Project: Partner - R | Resistors (81 / 81) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=5393aec102 |
+| Mouser Project: Partner - C | Capacitors (59 / 59) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=89c7b43e3d |
+| Mouser Project: Partner - V | Diodes (3 / 4) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=1df4c5cce4 |
+| Mouser Project: Partner - Sockets | IC sockets with turned pin contacts (101 / 101) | Mouser | https://www.mouser.com/ProjectManager/ProjectDetail.aspx?AccessID=c9cba6a4d2 |
+| 74LS01 | IC (E81) | Lotos | https://www.lotos.si/sl-SI/shop/item/2883000000106 |
+| Battery | 3.6 V 80 mAh Ni-Mh (BAT) | Delko | https://www.delko.si/sl/industrijska-36v-80-mah-ni-mh-polnilna-gp-baterija.html |
+
+The following components are not on these lists and you will need to find them elsewhere (e.g., eBay):
+
+| ID | Value | Comments |
+|--|--|--|
+| E59-E62, E71-E74, E85-E88, E98-E101 (16) | M3764A-15 |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |
+| X | X |  |

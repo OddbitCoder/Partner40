@@ -1,0 +1,17 @@
+## Cost of "Batch 0"
+
+The first batch of PCBs ("Batch 0") was created on . The first board was then assembled between ... The following table summarizes the costs of making the first board.
+
+| Item | Service | Cost - Goods | Cost - Shipping | Cost - Other | Total Cost | 
+|--|--|--|--|--|--|
+| PCB (costs for 1 board*) | PCBWay.com | 35.84 USD | 7.81 USD | 2.02 USD + VAT | 45.67 USD |
+| IC sockets | IC ELEKTRONIKA | 
+| Integrated circuits - E | Mouser | 118.95 €  | ** |  | 118.95 € |
+| Resistors - R | Mouser | 7.88 € | ** |  | 7.88 € |
+| Capacitors - C | Mouser | 32.97 € | ** |  | 32.97 € |
+| Other components () | Mouser | XX € | **
+| 74LS01 | LOTOS, KRANJ | 
+| **Total** |  |  |  |  | **202.80 €** |
+
+*The minimum order at PCBWay is 5 boards.
+**Mouser will not charge shipping for orders over 50 €. It thus makes sense to bundle all the orders.
