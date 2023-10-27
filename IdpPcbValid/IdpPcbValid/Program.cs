@@ -153,6 +153,7 @@ while (m0.Success)
     }
     else
     {
+        var padCount = 0;
         Match mRef = rRef.Match(m0.Value);
         string fpRef = mRef.Success ? mRef.Result("$1") : null;
         float x = Convert.ToSingle(m.Result("$1"));
@@ -170,6 +171,7 @@ while (m0.Success)
             }
             else
             {
+                padCount++;
                 pads.Add(new Pad
                 {
                     fpRef = fpRef,
@@ -184,6 +186,7 @@ while (m0.Success)
             }
             m = m.NextMatch();
         }
+        //Console.WriteLine($"{fpRef} {padCount}");
     }
     m0 = m0.NextMatch();
     count++;
