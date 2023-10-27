@@ -35220,29 +35220,4 @@
   (segment (start 100.325 220.99) (end 101.605 219.71) (width 0.25) (layer "B.Cu") (net 0) (tstamp ffc936fd-1578-4d63-a1ab-f460036f65e1))
   (segment (start 257.81 75.565) (end 259.715 77.47) (width 0.25) (layer "B.Cu") (net 0) (tstamp fff298f0-2da6-4a4c-bac3-60f6ea01e3d1))
   (segment (start 187.96 181.61) (end 185.42 184.15) (width 0.25) (layer "B.Cu") (net 0) (tstamp fffd666e-6e02-4952-bf60-fa586d0860d2))
-
-  (group "" (id 08fc56a2-ab46-4a11-95c5-d5a829472dbc)
-    (members
-      132a88f3-5593-4957-8254-f5aa6c7ff805
-      17dee607-a2d8-462d-bd19-4fc9afecd76d
-      2141264d-7c75-4cb5-a277-635952d6eaad
-      21f008e3-3d7e-4e64-972d-3c75280c2431
-      37d496b5-eaf6-4fd8-9365-1602f3354906
-      3f1c4918-363b-4323-9ce0-1502f03942df
-      553f7719-fef2-481d-8dca-108351a4ae69
-      638809f3-3475-4061-828b-7cb72165ac10
-      6864efa8-ae20-42be-8fdb-cc81fa8f6d06
-      6af9348f-394c-4a65-95e4-4d48bf228fc7
-      9ae68243-6711-4288-bc59-5221f0ffab52
-      9f3b0ddf-57c4-4735-86c9-04f5e29c5c83
-      b4a29d05-e72e-48bb-96ce-f89c7c9505d6
-      b4b59965-5b00-4c30-b069-57d7c4d00c4e
-      b6b869da-55a7-4f88-a491-94d599ea537a
-      c762645e-1d44-49d5-99ad-5aa3e7da1d20
-      cc2aaeb4-4964-4e97-8e21-7097fad8f92a
-      d7e53d34-9b7c-4661-bef8-edc974947f90
-      d829ba1f-2115-4cf7-a5b3-8136166bcc78
-      edc69cfa-1d0e-4b47-a8d6-f9bee44403cf
-    )
-  )
 )
