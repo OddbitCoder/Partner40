@@ -213,5 +213,26 @@ Thickness: 1.6 - 1.7 mm
 
 ### Capacitors - C
 
-| ID | Value | Value Ref 1 | Comments |
-|--|--|--|--|
+| ID | Value | Value Ref 1 | Value Ref 2 | Size Ref 2 | Comments |
+|--|--|--|--|--|--|
+| C1 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
+| C2 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
+| C3 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
+| C4 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
+| C5 | 1n | 1n0 | 1n0 | 5 mm |  |
+| C6 | 1n | 1n0 | 1n0S (400V?) | 12 mm |  |
+| C7 | 2.2n | 2n2 | 2n2 | 8 mm |  |
+| C8 | 68μ | 68uF 25V | 68uF 25V | 7 mm | Electrolytic capacitor. |
+| C17 | 68p | 68p | 68p | 5 mm |  |
+| C18 | 82p | 82p | 82p | 7 mm |  |
+| C20 | 68μ | 68 uF 25 V | 68 uF 25 V | 7 mm | Electrolytic capacitor. |
+| C21 | 20p | 22 pF | 22J | 5 mm |  |
+| C22 | 20p | 22 pF | 22J | 5 mm |  |
+| C102 | 2.2n | 2n2 | 2n2 | 7 mm |  |
+| C103 | 391 | 380K Y5P / 390K Y5P | 380/390K | 5 mm |  |
+| C110 | 391 | 390K Y5P | 380/390K | 5 mm |  |
+| C300 | 331 | 330 | 330 | 5 mm |  |
+| C301 | 680n | 684 100V | 684 50V | 9 mm |  |
+| CX | 104 | 104 50V | 104 50V | 5 mm | There are 41 of these on the board. |
+
+### Other
