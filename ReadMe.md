@@ -15,11 +15,11 @@ Track widths: 2.4 mm, 1.4 mm, 0.6 mm, 0.25 mm.
 
 ## Board 
 
-Thickness: 1.6 - 1.7 mm
+Thickness: 1.6 mm
 
 ## Components 
 
-### Integrated Circuits - E
+### Integrated Circuits - E (101)
 
 | ID | Value | Value Ref 1 | Value Ref 2 | Comments |
 |--|--|--|--|--|
@@ -125,7 +125,7 @@ Thickness: 1.6 - 1.7 mm
 | E107 | LS74 | SN74LS74AN | SN74LS74AN |  |
 | E108 | LS08 | 74LS08 PC | SN74LS08N |  |
 
-### Resistors - R
+### Resistors - R (81)
 
 | ID | Value | Value Ref 1 | Comments |
 |--|--|--|--|
@@ -205,34 +205,49 @@ Thickness: 1.6 - 1.7 mm
 | R90 | 10kΩ | 10 kΩ ±5% |  |
 | R91 | 4.7kΩ | 4.7 kΩ ±5% |  |
 | R95 | 10kΩ | 10 kΩ ±5% |  |
-| R200 | Z 2.7V | BZX 2,7 | Zener diode. |
+| R200 | Z 2.7V | BZX 2,7 | Zener diode. We used Vishay's TZX2V7C-TR diode. |
 | R201 | 560Ω | 560 Ω ±5% |  |
-| R202 | 15MΩ | 15 MΩ | Blue-colored body resistor (1% or 2% tolerance). |
+| R202 | 15MΩ | 15 MΩ | Blue-colored body resistor (1% or 2% tolerance). We used a 1/4W resistor with a tolerance of ±1%. |
 | R203 | 390Ω | 390 Ω ±5% |  |
 | R204 | 330Ω | 330 Ω ±5% |  | 
 
-### Capacitors - C
+Unless noted otherwise in the comments, we used 1/4 W resistors with a tolerance of ±5%.
+
+### Capacitors - C (59)
 
 | ID | Value | Value Ref 1 | Value Ref 2 | Size Ref 2 | Comments |
 |--|--|--|--|--|--|
-| C1 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
-| C2 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
-| C3 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
-| C4 | 100μ | 100 uF 40 V | 100 uF 40 V | 9 mm | Electrolytic capacitor. |
-| C5 | 1n | 1n0 | 1n0 | 5 mm |  |
-| C6 | 1n | 1n0 | 1n0S (400V?) | 12 mm |  |
-| C7 | 2.2n | 2n2 | 2n2 | 8 mm |  |
-| C8 | 68μ | 68uF 25V | 68uF 25V | 7 mm | Electrolytic capacitor. |
-| C17 | 68p | 68p | 68p | 5 mm |  |
-| C18 | 82p | 82p | 82p | 7 mm |  |
-| C20 | 68μ | 68 uF 25 V | 68 uF 25 V | 7 mm | Electrolytic capacitor. |
-| C21 | 20p | 22 pF | 22J | 5 mm |  |
-| C22 | 20p | 22 pF | 22J | 5 mm |  |
-| C102 | 2.2n | 2n2 | 2n2 | 7 mm |  |
-| C103 | 391 | 380K Y5P / 390K Y5P | 380/390K | 5 mm |  |
-| C110 | 391 | 390K Y5P | 380/390K | 5 mm |  |
-| C300 | 331 | 330 | 330 | 5 mm |  |
-| C301 | 680n | 684 100V | 684 50V | 9 mm |  |
-| CX | 104 | 104 50V | 104 50V | 5 mm | There are 41 of these on the board. |
+| C1 | 100μF | 100 uF 40 V | 100 uF 40 V | 9 mm | Radial electrolytic capacitor (50V 100μF 10%). |
+| C2 | 100μF | 100 uF 40 V | 100 uF 40 V | 9 mm | Radial electrolytic capacitor (50V 100μF 10%). |
+| C3 | 100μF | 100 uF 40 V | 100 uF 40 V | 9 mm | Radial electrolytic capacitor (50V 100μF 10%). |
+| C4 | 100μF | 100 uF 40 V | 100 uF 40 V | 9 mm | Radial electrolytic capacitor (50V 100μF 10%). |
+| C5 | 1nF | 1n0 | 1n0 | 5 mm |  |
+| C6 | 1nF | 1n0 | 1n0S (400V?) | 12 mm |  |
+| C7 | 2.2nF | 2n2 | 2n2 | 8 mm |  |
+| C8 | 68μF | 68uF 25V | 68uF 25V | 7 mm | Radial electrolytic capacitor (50V 68μF 10%). |
+| C17 | 68pF | 68p | 68p | 5 mm |  |
+| C18 | 82pF | 82p | 82p | 7 mm |  |
+| C20 | 68μF | 68 uF 25 V | 68 uF 25 V | 7 mm | Radial electrolytic capacitor (50V 68μF 10%). |
+| C21 | 20pF | 22 pF | 22J | 5 mm |  |
+| C22 | 20pF | 22 pF | 22J | 5 mm |  |
+| C102 | 2.2nF | 2n2 | 2n2 | 7 mm |  |
+| C103 | 390pF (391) | 380K Y5P / 390K Y5P | 380/390K | 5 mm |  |
+| C110 | 390pF (391) | 390K Y5P | 380/390K | 5 mm |  |
+| C300 | 330pF (331) | 330 | 330 | 5 mm |  |
+| C301 | 680nF | 684 100V | 684 50V | 9 mm | We used a multilayer ceramic capacitor (50V 0.68μF ±10%). It is physically/visually too small though (a higher voltage rating would probably look better). |
+| CX | 0.1μF (104) | 104 50V | 104 50V | 5 mm | We used multilayer ceramic capacitors (50V 0.1μF ±5%). There are 41 CXs on the board. | 
 
-### Other
+Unless specified otherwise in the comments, we used 1 kW ceramic disc capacitors. We chose this power rating because the physical sizes roughly match those of the original capacitors.
+
+### Other Components (8)
+
+| ID | Value | Value Schema | Value Ref 1 | Comments |
+|--|--|--|--|--|
+| BAT | 3.6V | 3V | VARTA SafeTronic 3.6 V | We used a 3.6 V 80 mAh Ni-Mh battery. |
+| V1 | LED | LED |  | Taken from the original/donor board. |
+| V2 | BA513 | 1N914 | BA 513 | We used a 1N914 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
+| V3 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
+| V4 | BA513 | 1N4148 | BA 513 | We used a 1N4148 diode. The original "Ref 1" board has a 1N4448 (BA513) diode. |
+| Y1 | 8MHz | 8MHZ | 8.000 SUNNY 2779 | Taken from the original/donor board. |
+| Y2 | 32.768kHz | 32.768KHZ | QRT-38 I | Taken from the original/donor board. |
+| Y3 | 1.8432MHz | 1.8432MHZ | 1843 20 kHZ 11034 | Taken from the original/donor board. |
