@@ -6,7 +6,15 @@ using Newtonsoft.Json;
 
 static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color color, IEnumerable<KiCadObject> padsAndVias, int netId)
 {
-    static bool CanFlow(Color c) => c.A == 255 && c.R == 0 && c.G == 0 && c.B == 0;
+    static bool CanFlow(Color cPx, Color cFF, int x, int y) 
+    {
+        if (cFF == Color.Red && (cPx.B == 255 && cPx.G == 0 && cPx.R == 0))
+        {
+            Console.Write($"{x},{y} ");
+            Console.ReadLine();
+        }
+        return cPx.A == 255 && (cPx.R != cFF.R || cPx.G != cFF.G || cPx.B != cFF.B); 
+    }
     var stack = new Stack<(int x, int y)>();
     startPos.ToList().ForEach(stack.Push);
     while (stack.Count > 0)
@@ -19,10 +27,10 @@ static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color co
         float ymm = KiCadObject.YFromPx(y);
         foreach (var obj in padsAndVias.Where(x => x.CheckHit(xmm, ymm))) { obj.netId = netId; }
         // push the neighboring pixels onto the stack
-        if (x + 1 < img.Width && CanFlow(img.GetPixel(x + 1, y))) { stack.Push((x + 1, y)); }
-        if (x - 1 >= 0 && CanFlow(img.GetPixel(x - 1, y))) { stack.Push((x - 1, y)); }
-        if (y + 1 < img.Height && CanFlow(img.GetPixel(x, y + 1))) { stack.Push((x, y + 1)); }
-        if (y - 1 >= 0 && CanFlow(img.GetPixel(x, y - 1))) { stack.Push((x, y - 1)); }
+        if (x + 1 < img.Width && CanFlow(img.GetPixel(x + 1, y), color, x + 1, y)) { stack.Push((x + 1, y)); }
+        if (x - 1 >= 0 && CanFlow(img.GetPixel(x - 1, y), color, x - 1, y)) { stack.Push((x - 1, y)); }
+        if (y + 1 < img.Height && CanFlow(img.GetPixel(x, y + 1), color, x, y + 1)) { stack.Push((x, y + 1)); }
+        if (y - 1 >= 0 && CanFlow(img.GetPixel(x, y - 1), color, x, y - 1)) { stack.Push((x, y - 1)); }
     }
 }
 
@@ -320,15 +328,20 @@ var g = Graphics.FromImage(ffMaskBack);
 
 foreach (var seg in segs.Where(x => x.layer == "B.Cu"))
 {
-    seg.Render(g);
+    seg.Render(g, Brushes.Black);
 }
 foreach (var pad in pads)
 {
-    pad.Render(g);
+    pad.Render(g, Brushes.Black);
 }
 foreach (var via in vias)
 {
-    via.Render(g);
+    var brush = Brushes.Black;
+    if (!segs.Any(s => (s.x == via.x && s.y == via.y) || (s.x2 == via.x && s.y2 == via.y))) // vias to which no segment connects directly
+    {
+        //brush = Brushes.Red;
+    }
+    via.Render(g, brush);
 }
 
 //ffMaskBack.Save(Path.Combine(maskPath, "ff-mask-back.png"), ImageFormat.Png);
@@ -339,15 +352,15 @@ g = Graphics.FromImage(ffMaskFront);
 
 foreach (var seg in segs.Where(x => x.layer == "F.Cu"))
 {
-    seg.Render(g);
+    seg.Render(g, Brushes.Black);
 }
 foreach (var pad in pads)
 {
-    pad.Render(g);
+    pad.Render(g, Brushes.Black);
 }
 foreach (var via in vias)
 {
-    via.Render(g);
+    via.Render(g, Brushes.Black);
 }
 
 //ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front.png"), ImageFormat.Png);
@@ -358,6 +371,31 @@ var uncfObjs = pads.Select(x => (KiCadObject)x)
     .Concat(vias)
     .ToList();
 netId = 0;
+
+// find the short 5V-GND
+// find pads connected to ground (1 iteration only)
+//var padGnd = pads.First(x => x.fpRef == "C20" && x.lbl == "2");
+//var padVcc = pads.First(x => x.fpRef == "R204" && x.lbl == "1");
+//FloodFill(ffMaskBack, new[] { (padGnd.XPx, padGnd.YPx) }, Color.Blue, uncfObjs, netId/* 0 = GND */);
+
+//var startObjs = new List<KiCadObject>(new[] { padVcc });
+//netId = 1;
+
+//do
+//{
+//    FloodFill(ffMaskFront, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
+//    startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
+//    uncfObjs = uncfObjs.Where(x => x.netId <= 0).ToList();
+//    FloodFill(ffMaskBack, startObjs.Select(x => (x.XPx, x.YPx)), Color.Red, uncfObjs, netId);
+//    startObjs = uncfObjs.Where(x => x.netId == netId).ToList();
+//    uncfObjs = uncfObjs.Where(x => x.netId <= 0).ToList();
+//    Console.Write(".");
+//} while (startObjs.Count > 0);
+
+//ffMaskBack.Save(Path.Combine(maskPath, "ff-mask-back.png"), ImageFormat.Png);
+//ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front.png"), ImageFormat.Png);
+
+//return;
 
 if (File.Exists(cacheFn))
 {
@@ -507,16 +545,15 @@ while (true)
     string padLbl = padId.Contains('/') ? padId.Split('/')[1] : null;
     if (padLbl == null)
     {
-        var comp = pads.Where(x => x.fpRef == fpRef);
-        if (comp.Any())
+        var fpPads = pads.Where(x => x.fpRef == fpRef);
+        if (fpPads.Any())
         {
-            foreach (var p in comp)
+            foreach (var p in fpPads)
             {
-                Console.WriteLine($"* {p.lbl} (net ID: {p.netId})");
-                foreach (var pp in pads.Where(x => x.netId == p.netId))
-                {
-                    Console.WriteLine($"\t* {pp.fpRef}/{pp.lbl}");
-                }
+                //Console.Write($"{fpRef}/{p.lbl} ");
+                Console.Write($"{p.lbl} ");
+                var otherPad = pads.FirstOrDefault(x => x.netId == p.netId && x.schNetId != -1 && x.fpRef != fpRef);
+                Console.WriteLine(otherPad != null ? $"{otherPad.fpRef}/{otherPad.lbl}" : "NOT FOUND");
             }
         }
         else 
@@ -556,7 +593,7 @@ abstract class KiCadObject
     public int netId = -1;
     public int schNetId = -1;
 
-    public abstract void Render(Graphics g);
+    public abstract void Render(Graphics g, Brush brush);
 
     public virtual bool CheckHit(float x, float y)
     {
@@ -580,9 +617,10 @@ class Seg : KiCadObject
     public float w;
     public string layer;
 
-    public override void Render(Graphics g)
+    public override void Render(Graphics g, Brush brush)
     {
-        var pen = new Pen(Color.Black, w * 0.0393701f * dpi);
+        var color = (brush as SolidBrush)?.Color ?? Color.Black;
+        var pen = new Pen(color, w * 0.0393701f * dpi);
         pen.StartCap = pen.EndCap = LineCap.Round;
         g.DrawLine(pen, x * 0.0393701f * dpi + ofsX, y * 0.0393701f * dpi + ofsY, 
             x2 * 0.0393701f * dpi + ofsX, y2 * 0.0393701f * dpi + ofsY);
@@ -593,10 +631,10 @@ class Via : KiCadObject
 {
     public float drill;
 
-    public override void Render(Graphics g)
+    public override void Render(Graphics g, Brush brush)
     {
         float sz = size * 0.0393701f * dpi;
-        g.FillEllipse(Brushes.Black, x * 0.0393701f * dpi - sz/2f + ofsX, y * 0.0393701f * dpi + ofsY - sz/2f, 
+        g.FillEllipse(brush, x * 0.0393701f * dpi - sz/2f + ofsX, y * 0.0393701f * dpi + ofsY - sz/2f, 
             sz, sz);
     }
 }
@@ -625,10 +663,10 @@ class Pad : KiCadObject
         return this;
     }
 
-    public override void Render(Graphics g)
+    public override void Render(Graphics g, Brush brush)
     {
         float sz = size * 0.0393701f * dpi;
-        g.FillEllipse(Brushes.Black, x * 0.0393701f * dpi + ofsX - sz/2f, y * 0.0393701f * dpi + ofsY - sz/2f, sz, sz);
+        g.FillEllipse(brush, x * 0.0393701f * dpi + ofsX - sz/2f, y * 0.0393701f * dpi + ofsY - sz/2f, sz, sz);
     }
 }
 
