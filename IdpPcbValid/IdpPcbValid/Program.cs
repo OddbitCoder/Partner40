@@ -436,6 +436,20 @@ File.WriteAllText(cacheFn, JsonConvert.SerializeObject(pads));
 
 // compare nets
 
+var missingComponents = new[] { "CX", "C1", "C2", "C3", "C4", "C10", "C100", "C101", "C11", "C12", 
+    "C13", "C14", "C15", "C16", "C19", "C9", "J4", "J11", "R27", "R28", 
+    "R30", "R31", "R32", "R33", "R34", "R35", "R56",
+    "R57" // "JJ11", "JJ12", "JJ3", "JJ30", "JJ31", "JJ3A", "JJ4", "JJ5", "JJ6", "R94"
+};
+
+foreach (var comp in missingComponents)
+{
+    if (nodes.Values.Any(x => x.name.StartsWith(comp + "/")))
+    {
+        Console.WriteLine($"WARNING: Found {comp} in schema.");
+    }
+}
+
 var netsSch = nodes.Values.GroupBy(x => x.netId)
     .Select(x => new {
         netId = x.Key,
@@ -450,10 +464,10 @@ var netsSch = nodes.Values.GroupBy(x => x.netId)
 var netsPcb = pads.GroupBy(x => x.netId)
     .Select(x => new {
         netId = x.Key,
-        set = x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef)) // excl. electrolytic and CX caps 
+        set = x.Where(y => !missingComponents.Contains(y.fpRef)) // excl. electrolytic and CX caps 
             .Select(y => $"{y.fpRef}/{y.lbl}")
             .ToHashSet(),
-        items = x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef))
+        items = x.Where(y => !missingComponents.Contains(y.fpRef))
             .ToDictionary(y => $"{y.fpRef}/{y.lbl}", y => y)
     })
     .Where(x => x.set.Count() > 1) // excl. nets with one single node
