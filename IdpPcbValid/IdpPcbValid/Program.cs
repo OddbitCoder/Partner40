@@ -66,7 +66,7 @@ static void FindPaths(NetNode node, int startPcbNetId, HashSet<int> pcbNetIds, H
     path.RemoveAt(path.Count - 1);  
 }
 
-const string kiCadFn = @"c:\Work\idp-pcb\pcb\idp-valid.kicad_pcb";
+const string kiCadFn = @"c:\Work\idp-pcb\pcb\idp.kicad_pcb";
 const string scanPath = @"C:\Users\miha\Desktop\vezje-idp\v4"; 
 const string maskPath = @"c:\Work\idp-pcb\IdpPcbValid\img";
 const string schFn = @"c:\Work\idp-pcb\sch\sch.txt";
