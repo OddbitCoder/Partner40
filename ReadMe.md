@@ -1,7 +1,7 @@
 
 ### Tracks
 
-Track widths: 2.4 mm, 1.4 mm, 0.6 mm, 0.3 mm.
+Track widths: 2.4 mm, 1.4 mm, 0.6 mm, 0.25 mm.
 
 ### Pads 
 
