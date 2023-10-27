@@ -25,9 +25,26 @@ static void FloodFill(Bitmap img, IEnumerable<(int x, int y)> startPos, Color co
     }
 }
 
+static void GraphFill(NetNode node, int netId)
+{
+    var stack = new Stack<NetNode>();
+    stack.Push(node);
+    while (stack.Count > 0)
+    {
+        var n = stack.Pop();
+        n.netId = netId;
+        // push the connected nodes onto the stack
+        foreach (var nn in n.nodes.Where(x => x.netId == -1)) 
+        { 
+            stack.Push(nn); 
+        }
+    }
+}
+
 const string kiCadFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\idp\idp-valid.kicad_pcb";
 const string scanPath = @"C:\Users\miha\Desktop\vezje-idp\v4"; 
 const string maskPath = @"C:\Users\miha\Desktop\vezje-idp\kicad\IdpPcbValid\img";
+const string schFn = @"C:\Users\miha\Desktop\vezje-idp\kicad\sch\sch.txt";
 
 string pcb = File.ReadAllText(kiCadFn);
 
@@ -200,6 +217,68 @@ foreach (var item in counters)
     Console.WriteLine($"{item.Key} : {item.Value}");
 }
 
+// process schema networks
+
+var nodes = new Dictionary<string, NetNode>();
+string implCompName = "";
+
+foreach (var line in File.ReadAllLines(schFn).Select(x => x.Trim()).Where(x => !x.StartsWith("--")))
+{
+    string ln = line.Trim();
+    if (ln.StartsWith("<"))
+    {
+        implCompName = ln.Trim('<', '>');
+        continue;
+    }
+    // resolve pad names
+    ln = Regex.Replace(ln, @"(?<=\s|^)(\d+)(?=\s|$)", $"{implCompName}/$1");
+    // resolve memory banks
+    ln = Regex.Replace(ln, @"BANK1/(\d+)", $"E59/$1 E60/$1 E61/$1 E62/$1 E71/$1 E72/$1 E73/$1 E74/$1");
+    ln = Regex.Replace(ln, @"BANK2/(\d+)", $"E85/$1 E86/$1 E87/$1 E88/$1 E98/$1 E99/$1 E100/$1 E101/$1");
+    Console.WriteLine(line);
+    Console.WriteLine("= " + ln);
+    var nodeNames = ln.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    for (int i = 0; i < nodeNames.Length; i++)
+    {
+        for (int j = i + 1; j < nodeNames.Length; j++)
+        {
+            if (!nodes.TryGetValue(nodeNames[i], out var node1)) { nodes[nodeNames[i]] = node1 = new NetNode { name = nodeNames[i] }; }
+            if (!nodes.TryGetValue(nodeNames[j], out var node2)) { nodes[nodeNames[j]] = node2 = new NetNode { name = nodeNames[j] }; }
+            node1.nodes.Add(node2);
+            node2.nodes.Add(node1); 
+        }
+    }
+}
+
+// compute networks in the schema graph
+
+var uncfNodes = nodes.Values.ToList();
+int netId = 0;
+
+while (uncfNodes.Count > 0)
+{
+    GraphFill(uncfNodes.First(), netId);
+
+    uncfNodes = uncfNodes.Where(x => x.netId == -1).ToList();
+
+    netId++;
+    Console.Write("*");
+}
+
+Console.WriteLine();
+Console.WriteLine($"Discovered {netId} nets in the schema network.");
+
+// output networks
+
+foreach (var net in nodes.Values.GroupBy(x => x.netId))
+{
+    Console.WriteLine($"Net ID: {net.Key}");
+    foreach (var item in net)
+    {
+        Console.WriteLine($"- {item.name}");
+    }
+}
+
 // render flood fill masks
 
 var img = (Bitmap)Image.FromFile(Path.Combine(scanPath, "back-mirrored-300dpi.jpg"));
@@ -245,7 +324,7 @@ ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front.png"), ImageFormat.Png);
 var uncfObjs = pads.Select(x => (KiCadObject)x)
     .Concat(vias)
     .ToList();
-int netId = 0;
+netId = 0;
 
 while (uncfObjs.Count > 0)
 {
@@ -269,7 +348,42 @@ while (uncfObjs.Count > 0)
 Console.WriteLine();
 Console.WriteLine($"{netId} nets were discovered.");
 
+int snc = pads.GroupBy(x => x.netId).Where(x => x.Count() == 1).Count();
+Console.WriteLine($"{snc} nets have one single node.");
+
 //ffMaskFront.Save(Path.Combine(maskPath, "ff-mask-front-filled.png"), ImageFormat.Png);
+
+// compare nets
+
+var padRegex = new Regex(@"^[A-Z][A-Z0-9]*/[0-9]+$");
+
+var netsSch = nodes.Values.GroupBy(x => x.netId)
+    .Select(x => x.Where(y => padRegex.Match(y.name).Success)) // exclude nodes that are not pads
+    .Where(x => x.Any())
+    .Select(x => x.Select(y => y.name))
+    .Select(x => x.ToHashSet())
+    .ToList();
+var netsPcb = pads.GroupBy(x => x.netId)
+    .Where(x => x.Count() > 1) // exclude nets with one single pad
+    .Select(x => x.Where(y => !new[] { "C1", "C2", "C3", "C4", "CX" }.Contains(y.fpRef))) // excl. electrolytic and CX caps 
+    .Where(x => x.Any())
+    .Select(x => x.Select(y => $"{y.fpRef}/{y.lbl}"))
+    .Select(x => x.ToHashSet())
+    .ToList();
+
+Console.WriteLine($"{netsSch.Count} : {netsPcb.Count}");
+
+int eqCount = 0;
+
+foreach (var net in netsSch)
+{
+    foreach (var net2 in netsPcb)
+    {
+        if (net.SetEquals(net2)) { eqCount++; }
+    }
+}
+
+Console.WriteLine($"Set equivalence: {eqCount}");
 
 // interactive mode
 
@@ -381,4 +495,11 @@ class Pad : KiCadObject
         float sz = size * 0.0393701f * dpi;
         g.FillEllipse(Brushes.Black, x * 0.0393701f * dpi + ofsX - sz/2f, y * 0.0393701f * dpi + ofsY - sz/2f, sz, sz);
     }
+}
+
+class NetNode
+{
+    public string name;
+    public List<NetNode> nodes = new();
+    public int netId = -1;
 }
