@@ -83,7 +83,7 @@
 
   (footprint "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal" (layer "F.Cu")
     (tstamp 01815b91-213e-49c2-9a4e-88dbe9146a66)
-    (at 125 55 180)
+    (at 125 61.115 180)
     (descr "Terminal Block Phoenix MKDS-1,5-2-5.08, 2 pins, pitch 5.08mm, size 10.2x9.8mm^2, drill diamater 1.3mm, pad diameter 2.6mm, see http://www.farnell.com/datasheets/100425.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_Phoenix")
     (tags "THT Terminal Block Phoenix MKDS-1,5-2-5.08 pitch 5.08mm size 10.2x9.8mm^2 drill 1.3mm pad 2.6mm")
     (attr through_hole)
@@ -966,7 +966,7 @@
 
   (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" (layer "F.Cu")
     (tstamp 5e019705-667f-4f4f-89cc-3e5c7e4ece85)
-    (at 121.22 65.91 90)
+    (at 121.22 72.025 90)
     (descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
     (tags "Through hole pin header THT 1x02 2.54mm single row")
     (attr through_hole)
@@ -1936,7 +1936,7 @@
 
   (footprint "Partner:Partner_Molex_Mega-Fit_76829-0106_2x03_P5.70mm_Vertical" (layer "F.Cu")
     (tstamp aa852e5b-30a3-44ef-bcf6-31628e905962)
-    (at 113.605 80 90)
+    (at 113.605 86.115 90)
     (descr "Molex Mega-Fit Power Connectors, 76829-0106 (compatible alternatives: 172065-0206, 172065-0306), 3 Pins per row (http://www.molex.com/pdm_docs/sd/768290102_sd.pdf), generated with kicad-footprint-generator")
     (tags "connector Molex Mega-Fit side entry")
     (attr through_hole)
@@ -1964,9 +1964,9 @@
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp fb5c0a93-9d35-40a0-bd12-f54d1b4c2975))
     (fp_line (start 7.62 17.78) (end 7.62 0)
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 04ad0e08-d1dd-4769-b9d8-82f24c309431))
-    (pad "1" thru_hole circle (at 0 0 90) (size 2.8 2.8) (drill 2) (layers "*.Cu" "*.Mask") (tstamp a6282217-ba03-4d5e-ba3a-d51547ce6ca0))
-    (pad "2" thru_hole circle (at -5.08 17.78 90) (size 2.8 2.8) (drill 2) (layers "*.Cu" "*.Mask") (tstamp 14f9f5d3-09a8-43b1-b26e-99d41070c8f5))
-    (pad "3" thru_hole circle (at 5.08 17.78 90) (size 2.8 2.8) (drill 2) (layers "*.Cu" "*.Mask") (tstamp adac3073-af25-449a-a962-7b13e1236281))
+    (pad "1" thru_hole circle (at 0 0 90) (size 2.6 2.6) (drill 1.3) (layers "*.Cu" "*.Mask") (tstamp a6282217-ba03-4d5e-ba3a-d51547ce6ca0))
+    (pad "2" thru_hole circle (at -5.08 17.78 90) (size 2.6 2.6) (drill 1.3) (layers "*.Cu" "*.Mask") (tstamp 14f9f5d3-09a8-43b1-b26e-99d41070c8f5))
+    (pad "3" thru_hole circle (at 5.08 17.78 90) (size 2.6 2.6) (drill 1.3) (layers "*.Cu" "*.Mask") (tstamp adac3073-af25-449a-a962-7b13e1236281))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Mega-Fit_76829-0106_2x03_P5.70mm_Vertical.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
@@ -2902,18 +2902,25 @@
   (gr_circle (center 133 100) (end 134.5 100)
     (stroke (width 0.1) (type default)) (fill none) (layer "Edge.Cuts") (tstamp fb21f2ea-ccde-45c5-b37a-68ebc86977b6))
 
-  (segment (start 10 40.003333) (end 105 40.003333) (width 1.8) (layer "B.Cu") (net 0) (tstamp 0d0cc018-0032-4682-9ebf-64b3432bbd4d))
-  (segment (start 10.08 15.005) (end 105.08 15.005) (width 1.8) (layer "B.Cu") (net 0) (tstamp 60a6fa9e-974c-4a59-bddb-ff9c5cc2cf02))
-  (segment (start 10 90) (end 105 90) (width 1.8) (layer "B.Cu") (net 0) (tstamp 7f3683b2-0eca-4055-8eaf-bd4f463a877a))
-  (segment (start 10 65.001666) (end 105 65.001666) (width 1.8) (layer "B.Cu") (net 0) (tstamp b4a028a9-30a1-445a-ac2a-4e70508f518d))
+  (segment (start 10 40.003333) (end 105 40.003333) (width 1.4) (layer "B.Cu") (net 0) (tstamp 0d0cc018-0032-4682-9ebf-64b3432bbd4d))
+  (segment (start 127.295 72.025) (end 131.385 76.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp 16028354-f361-4908-a5c5-72fea58c54e3))
+  (segment (start 131.385 76.115) (end 131.385 67.5) (width 1.4) (layer "B.Cu") (net 0) (tstamp 2f8347dd-f6b7-4b7b-ac00-366284e0e8e3))
+  (segment (start 131.385 81.035) (end 131.385 76.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp 33d4e50e-095b-47b4-a315-13a2ef94120d))
+  (segment (start 123.76 72.025) (end 127.295 72.025) (width 1.4) (layer "B.Cu") (net 0) (tstamp 4863603a-84f3-4cc9-8574-4a9dcdc0f44b))
+  (segment (start 113.61 81.035) (end 113.61 86.11) (width 1.4) (layer "B.Cu") (net 0) (tstamp 4f5b9940-4a8f-4d64-b5e7-c3377bf0fbb6))
+  (segment (start 10.08 15.005) (end 105.08 15.005) (width 1.4) (layer "B.Cu") (net 0) (tstamp 60a6fa9e-974c-4a59-bddb-ff9c5cc2cf02))
+  (segment (start 113.61 81.035) (end 113.61 76.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp 788df9bd-d566-4439-b8a8-c9d273993e4f))
+  (segment (start 10 90) (end 105 90) (width 1.4) (layer "B.Cu") (net 0) (tstamp 7f3683b2-0eca-4055-8eaf-bd4f463a877a))
+  (segment (start 113.605 80.962413) (end 113.604685 80.962098) (width 0.25) (layer "B.Cu") (net 0) (tstamp 8828867a-86bd-4fb0-832c-dc0aa51e7654))
+  (segment (start 117.7 72.025) (end 113.61 76.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp a60b204e-357c-4483-a4dd-612c7818d1c0))
+  (segment (start 113.61 67.505) (end 120 61.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp ac2c6c74-6380-4867-8cd6-5c6d469278a1))
+  (segment (start 113.61 86.11) (end 113.605 86.115) (width 0) (layer "B.Cu") (net 0) (tstamp b1f218b6-7494-40d0-b0e8-780deae71ee7))
+  (segment (start 10 65.001666) (end 105 65.001666) (width 1.4) (layer "B.Cu") (net 0) (tstamp b4a028a9-30a1-445a-ac2a-4e70508f518d))
+  (segment (start 121.22 72.025) (end 117.7 72.025) (width 1.4) (layer "B.Cu") (net 0) (tstamp d94e3aef-18be-495a-872d-8f6efe9d7ba1))
+  (segment (start 131.385 91.195) (end 131.385 81.035) (width 1.4) (layer "B.Cu") (net 0) (tstamp e6b0250c-25e8-4e05-b1d2-add103a1b986))
+  (segment (start 113.61 76.115) (end 113.61 67.505) (width 1.4) (layer "B.Cu") (net 0) (tstamp ed56451e-47bf-4370-aa3e-5382d5e4521b))
+  (segment (start 131.385 67.5) (end 125 61.115) (width 1.4) (layer "B.Cu") (net 0) (tstamp fa3ab13d-b44d-4044-8035-eb4edb359602))
 
-  (group "" (id e63ce1f0-d969-4a5a-a9a4-c171cbe7bd40)
-    (members
-      01815b91-213e-49c2-9a4e-88dbe9146a66
-      5e019705-667f-4f4f-89cc-3e5c7e4ece85
-      aa852e5b-30a3-44ef-bcf6-31628e905962
-    )
-  )
   (group "" (id 2237db98-01a6-466a-99ef-7d4034d628f1)
     (members
       050928c2-84a4-40e1-9fbb-52ff2f08f9be
@@ -2922,16 +2929,6 @@
       a1b553d4-1aba-43af-ba31-635ff316fd43
       b4a028a9-30a1-445a-ac2a-4e70508f518d
       f2965e2b-7646-4a90-8824-fc524771842e
-    )
-  )
-  (group "" (id 36c2d1cf-10f5-4173-bc2c-243be78e4083)
-    (members
-      0d0cc018-0032-4682-9ebf-64b3432bbd4d
-      19df9f0e-3dd9-46a1-80aa-337912c36e26
-      5d2ce318-7adb-41e7-b5a6-dd37da717692
-      c1b3507b-dcb3-439c-a852-bb506b4655ae
-      cc88abbf-de21-44d5-8ce6-6f033368ea14
-      df21703d-0b67-4a32-b744-404dc3acbf6f
     )
   )
   (group "" (id 9383b0f5-aee2-47f1-a98a-f0565cc88a87)
