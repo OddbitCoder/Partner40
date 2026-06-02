@@ -9253,7 +9253,7 @@
 		(at 341.55 240.03 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX39"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -14472,7 +14472,7 @@
 		(at 323.85 133.35 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX35"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -14713,7 +14713,7 @@
 		(at 231.14 67.27 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX14"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -14954,7 +14954,7 @@
 		(at 82.51 130.81 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX3"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -16082,7 +16082,7 @@
 		(at 116.8 57.15 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX6"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -16562,7 +16562,7 @@
 		(at 248.92 162.56 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX18"
 			(at -1.905 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -17677,7 +17677,7 @@
 		(at 256.54 112.99 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX22"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -18166,7 +18166,7 @@
 		(at 224.75 217.17 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX13"
 			(at 7.58 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -18407,7 +18407,7 @@
 		(at 300.99 179.07 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX29"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -24334,7 +24334,7 @@
 		(at 281.94 82.51 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX25"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -27048,7 +27048,7 @@
 		(at 231.14 82.51 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX15"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -27289,7 +27289,7 @@
 		(at 345.44 179.07 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX40"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -28601,7 +28601,7 @@
 		(at 325.12 148.59 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX36"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -30801,7 +30801,7 @@
 		(at 231.14 97.75 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX16"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -32552,7 +32552,7 @@
 		(at 281.94 67.27 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX24"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -35108,7 +35108,7 @@
 		(at 256.54 97.75 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX21"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -35597,7 +35597,7 @@
 		(at 346.71 208.28 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX41"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -37174,7 +37174,7 @@
 		(at 327.66 238.76 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX37"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -41640,7 +41640,7 @@
 		(at 278.13 163.83 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX23"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -41881,7 +41881,7 @@
 		(at 290.83 224.79 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX28"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -42500,7 +42500,7 @@
 		(at 256.54 82.51 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX20"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -47046,7 +47046,7 @@
 		(at 162.52 57.15 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX11"
 			(at 7.58 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -49023,7 +49023,7 @@
 		(at 158.71 209.55 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX10"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -49264,7 +49264,7 @@
 		(at 307.34 113.03 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX34"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -54165,7 +54165,7 @@
 		(at 82.55 64.77 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX4"
 			(at 7.62 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -54654,7 +54654,7 @@
 		(at 328.93 179.07 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX38"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -55986,7 +55986,7 @@
 		(at 123.15 73.66 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX7"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -57998,7 +57998,7 @@
 		(at 139.66 57.15 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX9"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -58239,7 +58239,7 @@
 		(at 303.49 157.48 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX30"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -59308,7 +59308,7 @@
 		(at 231.14 112.99 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX17"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -59549,7 +59549,7 @@
 		(at 307.34 82.51 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX32"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -60621,7 +60621,7 @@
 		(at 256.54 67.27 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX19"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -62942,7 +62942,7 @@
 		(at 281.94 97.75 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX26"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -65761,7 +65761,7 @@
 		(at 307.34 67.27 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX31"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -68093,7 +68093,7 @@
 		(at 209.55 162.56 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX12"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -68559,7 +68559,7 @@
 		(at 281.94 113.03 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX27"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -70965,7 +70965,7 @@
 		(at 80.01 87.63 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX2"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -71831,7 +71831,7 @@
 		(at 102.87 201.93 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX5"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -77197,7 +77197,7 @@
 		(at 72.35 158.75 180)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX1"
 			(at -2.54 0 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -86282,7 +86282,7 @@
 		(at 127 140.89 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX8"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -89944,7 +89944,7 @@
 		(at 307.34 97.75 90)
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=4.3*1.9mm^2, Capacitor, http://www.vishay.com/docs/45233/krseries.pdf")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 4.3mm width 1.9mm Capacitor")
-		(property "Reference" "CX"
+		(property "Reference" "CX33"
 			(at -2.54 0 270)
 			(unlocked yes)
 			(layer "F.SilkS")
