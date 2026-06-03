@@ -45,6 +45,17 @@ exec(open(r"C:\Work\partner40\valid\propagate_nets.py").read())
 This walks the physical connectivity from pads through connected tracks and vias,
 assigning the correct net to each. Saves the PCB automatically.
 
+### 5. Mark unconnected pads
+
+In KiCad's scripting console:
+
+```python
+exec(open(r"C:\Work\partner40\valid\unconnected_pads.py").read())
+```
+
+Finds pads with no tracks connected. Assigns unique `unconnected-(REF-PadN)` nets to pads
+with no net, and lists pads that have a net assigned but no physical trace.
+
 ## sch.txt Format
 
 - `E4/3 M1I- E3/11` — component/pin pairs and net names on the same line belong to the same net
